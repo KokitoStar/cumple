@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regalo de Cumpleaños – Kokito Star</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #E6007E 0%, #FF6B9D 100%);
+      margin: 0;
+      padding: 20px;
+      color: #1D1D1B;
+      min-height: 100vh;
+    }
+    
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    
+    .logo {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    .logo h1 {
+      color: white;
+      font-size: 2.5em;
+      font-weight: 700;
+      margin: 0;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .logo p {
+      color: white;
+      opacity: 0.9;
+      margin: 10px 0 0 0;
+      font-size: 1.1em;
+    }
+    
+    .form-container {
+      background: white;
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      backdrop-filter: blur(10px);
+    }
+    
+    .form-title {
+      color: #E6007E;
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 1.5em;
+      font-weight: 600;
+    }
+    
+    .input-group {
+      margin-bottom: 20px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #333;
+      font-weight: 600;
+      font-size: 0.9em;
+    }
+    
+    input, select {
+      width: 100%;
+      padding: 15px;
+      border-radius: 10px;
+      border: 2px solid #e0e0e0;
+      font-size: 16px;
+      font-family: 'Montserrat', sans-serif;
+      transition: all 0.3s ease;
+    }
+    
+    input:focus, select:focus {
+      outline: none;
+      border-color: #E6007E;
+      box-shadow: 0 0 0 3px rgba(230, 0, 126, 0.1);
+    }
+    
+    .submit-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #E6007E 0%, #FF6B9D 100%);
+      color: white;
+      border: none;
+      padding: 18px;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 20px;
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(230, 0, 126, 0.3);
+    }
+    
+    .submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+    
+    .error-message {
+      color: #ff4757;
+      font-size: 0.9em;
+      margin-top: 5px;
+      display: none;
+    }
+    
+    .success-container {
+      display: none;
+      text-align: center;
+      background: white;
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    
+    .success-animation {
+      font-size: 4em;
+      margin-bottom: 20px;
+      animation: bounce 1s infinite alternate;
+    }
+    
+    @keyframes bounce {
+      from { transform: translateY(0px); }
+      to { transform: translateY(-10px); }
+    }
+    
+    .pass-preview {
+      max-width: 300px;
+      margin: 20px auto;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+    
+    .download-btn {
+      background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      margin: 10px;
+      transition: all 0.3s ease;
+    }
+    
+    .download-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+    }
+    
+    .new-pass-btn {
+      background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      margin: 10px;
+      transition: all 0.3s ease;
+    }
+    
+    .new-pass-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(108, 117, 125, 0.3);
+    }
+    
+    #birthdayPass {
+      position: absolute;
+      left: -5000px;
+      top: 0;
+      width: 1080px;
+      height: 1350px;
+      background-image: url('assets/images/kokito-birthday-pass-template.png');
+      background-size: 1080px 1350px;
+      background-repeat: no-repeat;
+      background-position: 0 0;
+    }
+    
+    .pass-element {
+      position: absolute;
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    .pass-qr {
+      left: 277.93px;
+      top: 971.48px;
+      width: 178.77px;
+      height: 178.77px;
+    }
+    
+    .pass-code {
+      left: 539px;
+      top: 1058.68px;
+      width: 295.63px;
+      height: 29.38px;
+      font-size: 28px;
+      font-weight: 700;
+      color: #000000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 8px;
+      text-shadow: none;
+    }
+    
+    .pass-valid {
+      left: 435.60px;
+      top: 1179.57px;
+      width: 119.43px;
+      height: 21.91px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #000000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 6px;
+      text-shadow: none;
+    }
+    
+    .loading {
+      display: none;
+      text-align: center;
+      padding: 20px;
+    }
+    
+    .spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #E6007E;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .birthday-decoration {
+      position: fixed;
+      pointer-events: none;
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="logo">
+      <h1>KOKITO STAR</h1>
+      <p>🎨 Tu regalo de cumpleaños te espera</p>
+    </div>
+
+    <div class="form-container" id="formContainer">
+      <h2 class="form-title">¡Reclama tu tatuaje gratis! 🎂</h2>
+      <form id="birthdayForm">
+        <div class="input-group">
+          <label for="fullName">Nombre completo *</label>
+          <input type="text" id="fullName" name="fullName" required>
+          <div class="error-message" id="fullNameError"></div>
+        </div>
+
+        <div class="input-group">
+          <label for="birthDate">Fecha de nacimiento *</label>
+          <input type="date" id="birthDate" name="birthDate" required>
+          <div class="error-message" id="birthDateError"></div>
+        </div>
+
+        <div class="input-group">
+          <label for="cedula">Número de cédula *</label>
+          <input type="text" id="cedula" name="cedula" required pattern="\d+">
+          <div class="error-message" id="cedulaError"></div>
+        </div>
+
+        <div class="input-group">
+          <label for="phone">Teléfono *</label>
+          <input type="tel" id="phone" name="phone" required>
+          <div class="error-message" id="phoneError"></div>
+        </div>
+
+        <div class="input-group">
+          <label for="city">Ciudad *</label>
+          <input type="text" id="city" name="city" required>
+          <div class="error-message" id="cityError"></div>
+        </div>
+
+        <div class="input-group">
+          <label for="collaboratorCode">Código de colaboradora *</label>
+          <input type="text" id="collaboratorCode" name="collaboratorCode" required>
+          <div class="error-message" id="collaboratorCodeError"></div>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">
+          🎁 Solicitar tatuaje gratis
+        </button>
+      </form>
+    </div>
+
+    <div class="loading" id="loading">
+      <div class="spinner"></div>
+      <p>Generando tu pase de cumpleaños...</p>
+    </div>
+
+    <div class="success-container" id="successContainer">
+      <div class="success-animation">🎉</div>
+      <h2 style="color: #E6007E; margin-bottom: 10px;">¡Feliz cumpleaños!</h2>
+      <p style="color: #666; margin-bottom: 30px;">Tu pase ha sido generado exitosamente</p>
+      
+      <div class="pass-preview" id="passPreview"></div>
+      
+      <div>
+        <button class="download-btn" id="downloadBtn">
+          📥 Descargar pase
+        </button>
+        <button class="new-pass-btn" id="newPassBtn">
+          🔄 Nuevo registro
+        </button>
+      </div>
+      
+      <p style="color: #888; font-size: 0.9em; margin-top: 20px;">
+        Válido por 16 días (8 días antes y después de tu cumpleaños)
+      </p>
+    </div>
+  </div>
+
+  <!-- Hidden canvas for pass generation -->
+  <div id="birthdayPass">
+    <canvas class="pass-element pass-qr" id="qrCanvas"></canvas>
+    <div class="pass-element pass-code" id="passCode"></div>
+    <div class="pass-element pass-valid" id="passValid"></div>
+  </div>
+
+  <script>
+    // Set today's date as default
+    document.addEventListener('DOMContentLoaded', function() {
+      const today = new Date();
+      const todayString = today.toISOString().split('T')[0];
+      document.getElementById('birthDate').value = todayString;
+    });
+
+    // Valid collaborator codes (in production, this should be more secure)
+    const validCodes = ['KOK001', 'KOK002', 'KOK003', 'KOK004', 'KOK005'];
+    
+    // Store registered cedulas (in production, use proper database)
+    let registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+
+    document.getElementById('birthdayForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      if (await validateForm()) {
+        await generateBirthdayPass();
+      }
+    });
+
+    async function validateForm() {
+      const formData = getFormData();
+      let isValid = true;
+
+      // Clear previous errors
+      document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
+
+      // Validate full name
+      if (!formData.fullName.trim() || formData.fullName.length < 3) {
+        showError('fullNameError', 'El nombre debe tener al menos 3 caracteres');
+        isValid = false;
+      }
+
+      // Validate birth date and birthday range
+      const birthDate = new Date(formData.birthDate);
+      const today = new Date();
+      const currentYear = today.getFullYear();
+      
+      // Create birthday for current year
+      const thisYearBirthday = new Date(currentYear, birthDate.getMonth(), birthDate.getDate());
+      
+      // Calculate days difference
+      const daysDifference = Math.abs((today - thisYearBirthday) / (1000 * 60 * 60 * 24));
+      
+      if (daysDifference > 8) {
+        showError('birthDateError', 'Solo válido 8 días antes o después de tu cumpleaños');
+        isValid = false;
+      }
+
+      // Validate cedula (numbers only, not empty, not already registered)
+      if (!/^\d+$/.test(formData.cedula)) {
+        showError('cedulaError', 'La cédula debe contener solo números');
+        isValid = false;
+      } else if (registeredUsers.includes(formData.cedula)) {
+        showError('cedulaError', 'Esta cédula ya ha sido registrada');
+        isValid = false;
+      }
+
+      // Validate phone
+      if (!formData.phone.trim() || formData.phone.length < 7) {
+        showError('phoneError', 'Ingresa un teléfono válido');
+        isValid = false;
+      }
+
+      // Validate city
+      if (!formData.city.trim()) {
+        showError('cityError', 'La ciudad es requerida');
+        isValid = false;
+      }
+
+      // Validate collaborator code
+      if (!validCodes.includes(formData.collaboratorCode.toUpperCase())) {
+        showError('collaboratorCodeError', 'Código de colaboradora inválido');
+        isValid = false;
+      }
+
+      return isValid;
+    }
+
+    function getFormData() {
+      return {
+        fullName: document.getElementById('fullName').value,
+        birthDate: document.getElementById('birthDate').value,
+        cedula: document.getElementById('cedula').value,
+        phone: document.getElementById('phone').value,
+        city: document.getElementById('city').value,
+        collaboratorCode: document.getElementById('collaboratorCode').value
+      };
+    }
+
+    function showError(elementId, message) {
+      const errorEl = document.getElementById(elementId);
+      errorEl.textContent = message;
+      errorEl.style.display = 'block';
+    }
+
+    async function generateBirthdayPass() {
+      const formData = getFormData();
+      
+      // Show loading
+      document.getElementById('formContainer').style.display = 'none';
+      document.getElementById('loading').style.display = 'block';
+
+      // Generate unique code and store globally
+      const uniqueCode = generateUniqueCode();
+      window.currentUniqueCode = uniqueCode;
+      
+      const qrData = `https://kokitostar.com/validate/${uniqueCode}`;
+      
+      // Calculate valid until date (8 days after birthday)
+      const birthDate = new Date(formData.birthDate);
+      const currentYear = new Date().getFullYear();
+      const thisYearBirthday = new Date(currentYear, birthDate.getMonth(), birthDate.getDate());
+      const validUntil = new Date(thisYearBirthday);
+      validUntil.setDate(validUntil.getDate() + 8);
+      window.currentValidUntil = validUntil.toLocaleDateString('es-ES');
+
+      // Save data (in production, send to Google Sheets)
+      const userData = {
+        ...formData,
+        uniqueCode,
+        generatedAt: new Date().toISOString(),
+        validUntil: validUntil.toISOString()
+      };
+      
+      await saveUserData(userData);
+
+      // Add cedula to registered users
+      registeredUsers.push(formData.cedula);
+      localStorage.setItem('registeredUsers', JSON.stringify(registeredUsers));
+
+      // Generate pass image directly
+      setTimeout(async () => {
+        await createPassImage();
+        
+        // Hide loading, show success
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('successContainer').style.display = 'block';
+        
+        // Add celebration effect
+        createCelebrationEffect();
+      }, 2000);
+    }
+
+    function generateUniqueCode() {
+      const timestamp = Date.now().toString().slice(-6);
+      const random = Math.random().toString(36).substr(2, 4).toUpperCase();
+      return `KOK${timestamp}${random}`;
+    }
+
+    async function saveUserData(userData) {
+      // In production, integrate with Google Sheets API
+      console.log('Saving user data:', userData);
+      
+      // Simulate API call
+      return new Promise(resolve => {
+        setTimeout(() => {
+          console.log('Data saved successfully');
+          resolve();
+        }, 1000);
+      });
+    }
+
+    async function createPassImage() {
+      return new Promise((resolve) => {
+        try {
+          // Create canvas manually to avoid tainted canvas issues
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+          canvas.width = 1080;
+          canvas.height = 1350;
+          
+          // Load the background image correctly
+          const img = new Image();
+          img.onload = function() {
+            console.log('Background image loaded successfully');
+            
+            // Draw the background image
+            ctx.drawImage(img, 0, 0, 1080, 1350);
+            
+            // Get form data for positioning
+            const formData = getFormData();
+            const uniqueCode = window.currentUniqueCode;
+            const validUntil = window.currentValidUntil;
+            
+            // Draw QR code
+            const qrCanvas = document.createElement('canvas');
+            const qr = new QRious({
+              element: qrCanvas,
+              value: `https://kokitostar.com/validate/${uniqueCode}`,
+              size: 179,
+              background: 'white',
+              foreground: '#000000'
+            });
+            ctx.drawImage(qrCanvas, 277.93, 971.48, 178.77, 178.77);
+            
+            // Draw white backgrounds for text
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
+            ctx.fillRect(539, 1058.68, 295.63, 29.38);
+            ctx.fillRect(435.60, 1179.57, 119.43, 21.91);
+            
+            // Draw code text
+            ctx.fillStyle = '#000000';
+            ctx.font = 'bold 28px Montserrat, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(uniqueCode, 539 + 295.63/2, 1058.68 + 29.38/2);
+            
+            // Draw valid until text
+            ctx.font = 'bold 18px Montserrat, sans-serif';
+            ctx.fillText(validUntil, 435.60 + 119.43/2, 1179.57 + 21.91/2);
+            
+            // Create preview
+            const previewContainer = document.getElementById('passPreview');
+            const previewCanvas = document.createElement('canvas');
+            const previewCtx = previewCanvas.getContext('2d');
+            
+            const maxWidth = 300;
+            const scale = maxWidth / 1080;
+            previewCanvas.width = 1080 * scale;
+            previewCanvas.height = 1350 * scale;
+            
+            previewCtx.drawImage(canvas, 0, 0, previewCanvas.width, previewCanvas.height);
+            
+            previewContainer.innerHTML = '';
+            previewContainer.appendChild(previewCanvas);
+            
+            // Store canvas for download (this will be tainted, so we create a clean version)
+            window.fullPassCanvas = canvas;
+            window.needsCleanCanvas = true; // Flag to create clean version on download
+            resolve();
+          };
+          
+          img.onerror = function() {
+            console.error('Error loading background image, using fallback');
+            // Fallback to gradient if image fails to load
+            const gradient = ctx.createLinearGradient(0, 0, 1080, 1350);
+            gradient.addColorStop(0, '#E6007E');
+            gradient.addColorStop(1, '#FF6B9D');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 1080, 1350);
+            
+            // Continue with rest of elements
+            const formData = getFormData();
+            const uniqueCode = window.currentUniqueCode;
+            const validUntil = window.currentValidUntil;
+            
+            const qrCanvas = document.createElement('canvas');
+            const qr = new QRious({
+              element: qrCanvas,
+              value: `https://kokitostar.com/validate/${uniqueCode}`,
+              size: 179,
+              background: 'white',
+              foreground: '#000000'
+            });
+            ctx.drawImage(qrCanvas, 277.93, 971.48, 178.77, 178.77);
+            
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
+            ctx.fillRect(539, 1058.68, 295.63, 29.38);
+            ctx.fillRect(435.60, 1179.57, 119.43, 21.91);
+            
+            ctx.fillStyle = '#000000';
+            ctx.font = 'bold 28px Montserrat, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(uniqueCode, 539 + 295.63/2, 1058.68 + 29.38/2);
+            
+            ctx.font = 'bold 18px Montserrat, sans-serif';
+            ctx.fillText(validUntil, 435.60 + 119.43/2, 1179.57 + 21.91/2);
+            
+            const previewContainer = document.getElementById('passPreview');
+            const previewCanvas = document.createElement('canvas');
+            const previewCtx = previewCanvas.getContext('2d');
+            
+            const maxWidth = 300;
+            const scale = maxWidth / 1080;
+            previewCanvas.width = 1080 * scale;
+            previewCanvas.height = 1350 * scale;
+            
+            previewCtx.drawImage(canvas, 0, 0, previewCanvas.width, previewCanvas.height);
+            
+            previewContainer.innerHTML = '';
+            previewContainer.appendChild(previewCanvas);
+            
+            window.fullPassCanvas = canvas;
+            window.needsCleanCanvas = false; // Gradient canvas is clean
+            resolve();
+          };
+          
+          // Load your real image
+          img.src = 'assets/images/kokito-birthday-pass-template.png';
+          
+        } catch (error) {
+          console.error('Error generating pass image:', error);
+          alert('Error al generar la imagen. Por favor, intenta nuevamente.');
+          resolve();
+        }
+      });
+    }
+
+    // Function to create a clean canvas without external images for download
+    function createCleanCanvasForDownload() {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = 1080;
+      canvas.height = 1350;
+      
+      // Create gradient background (clean, no external images)
+      const gradient = ctx.createLinearGradient(0, 0, 1080, 1350);
+      gradient.addColorStop(0, '#E6007E');
+      gradient.addColorStop(1, '#FF6B9D');
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, 1080, 1350);
+      
+      // Add only the dynamic elements (QR, code, valid until)
+      const uniqueCode = window.currentUniqueCode;
+      const validUntil = window.currentValidUntil;
+      
+      // Add QR code at exact position
+      const qrCanvas = document.createElement('canvas');
+      const qr = new QRious({
+        element: qrCanvas,
+        value: `https://kokitostar.com/validate/${uniqueCode}`,
+        size: 179,
+        background: 'white',
+        foreground: '#000000'
+      });
+      ctx.drawImage(qrCanvas, 277.93, 971.48, 178.77, 178.77);
+      
+      // Draw white backgrounds for text at exact positions
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
+      ctx.fillRect(539, 1058.68, 295.63, 29.38);
+      ctx.fillRect(435.60, 1179.57, 119.43, 21.91);
+      
+      // Draw code text at exact position
+      ctx.fillStyle = '#000000';
+      ctx.font = 'bold 28px Arial, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(uniqueCode, 539 + 295.63/2, 1058.68 + 29.38/2);
+      
+      // Draw valid until text at exact position
+      ctx.font = 'bold 18px Arial, sans-serif';
+      ctx.fillText(validUntil, 435.60 + 119.43/2, 1179.57 + 21.91/2);
+      
+      return canvas;
+    }
+
+    function createCelebrationEffect() {
+      const colors = ['#E6007E', '#FF6B9D', '#FFD700', '#FF69B4'];
+      
+      for (let i = 0; i < 20; i++) {
+        setTimeout(() => {
+          const confetti = document.createElement('div');
+          confetti.innerHTML = ['🎉', '🎂', '🎈', '⭐'][Math.floor(Math.random() * 4)];
+          confetti.style.position = 'fixed';
+          confetti.style.left = Math.random() * 100 + 'vw';
+          confetti.style.top = '-50px';
+          confetti.style.fontSize = '2em';
+          confetti.style.pointerEvents = 'none';
+          confetti.style.zIndex = '1000';
+          confetti.style.animation = 'fall 3s linear forwards';
+          
+          document.body.appendChild(confetti);
+          
+          setTimeout(() => {
+            confetti.remove();
+          }, 3000);
+        }, i * 200);
+      }
+    }
+
+    // Helper function to add dynamic elements to any canvas context (moved up)
+    function addDynamicElements(ctx) {
+      const uniqueCode = window.currentUniqueCode;
+      const validUntil = window.currentValidUntil;
+      
+      // Add QR code
+      const qrCanvas = document.createElement('canvas');
+      const qr = new QRious({
+        element: qrCanvas,
+        value: `https://kokitostar.com/validate/${uniqueCode}`,
+        size: 179,
+        background: 'white',
+        foreground: '#000000'
+      });
+      ctx.drawImage(qrCanvas, 277.93, 971.48, 178.77, 178.77);
+      
+      // Add backgrounds
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
+      ctx.fillRect(539, 1058.68, 295.63, 29.38);
+      ctx.fillRect(435.60, 1179.57, 119.43, 21.91);
+      
+      // Add text
+      ctx.fillStyle = '#000000';
+      ctx.font = 'bold 28px Arial, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(uniqueCode, 539 + 295.63/2, 1058.68 + 29.38/2);
+      
+      ctx.font = 'bold 18px Arial, sans-serif';
+      ctx.fillText(validUntil, 435.60 + 119.43/2, 1179.57 + 21.91/2);
+    }
+
+    // Helper function to download blob
+    function downloadBlob(blob, strategy) {
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      const formData = getFormData();
+      const filename = `KOKITO_PASS_${strategy}_${formData.fullName.replace(/\s+/g, '_')}_${Date.now()}.png`;
+      link.download = filename;
+      link.href = url;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+      console.log(`✅ Download successful with ${strategy}`);
+    }
+
+    // FIXED DOWNLOAD APPROACH FOR LOCAL FILES
+    document.getElementById('downloadBtn').addEventListener('click', async function() {
+      console.log('=== DIAGNOSTICS ===');
+      console.log('🟡 PROBLEM IDENTIFIED: Running from file:// protocol');
+      console.log('🟡 CORS blocks local file access');
+      console.log('🟡 Solution: Using workarounds for local development');
+      
+      // For local file:// protocol, we need different approaches
+      
+      // Method 1: Try to use the image via HTML img element (sometimes works locally)
+      try {
+        console.log('=== METHOD 1: HTML Image Element ===');
+        await downloadWithHtmlImage();
+        return;
+      } catch (error) {
+        console.log('❌ Method 1 failed:', error.message);
+      }
+      
+      // Method 2: Manual recreation (guaranteed to work)
+      try {
+        console.log('=== METHOD 2: Manual Recreation ===');
+        await downloadManualRecreation();
+        return;
+      } catch (error) {
+        console.log('❌ Method 2 failed:', error.message);
+      }
+      
+      // Method 3: Basic fallback
+      console.log('=== METHOD 3: Basic Fallback ===');
+      downloadBasicFallback();
+    });
+
+    // Method 1: Try HTML image element (sometimes bypasses CORS locally)
+    async function downloadWithHtmlImage() {
+      return new Promise((resolve, reject) => {
+        const img = document.createElement('img');
+        
+        img.onload = function() {
+          try {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = 1080;
+            canvas.height = 1350;
+            
+            // Draw the image
+            ctx.drawImage(img, 0, 0, 1080, 1350);
+            
+            // Add dynamic elements
+            addDynamicElements(ctx);
+            
+            // Try to download
+            canvas.toBlob(function(blob) {
+              if (blob) {
+                downloadBlob(blob, 'HTML_IMAGE');
+                resolve();
+              } else {
+                reject(new Error('Failed to create blob'));
+              }
+            }, 'image/png', 1.0);
+            
+          } catch (error) {
+            reject(error);
+          }
+        };
+        
+        img.onerror = () => reject(new Error('Image load failed'));
+        
+        // Try loading the image
+        img.src = 'assets/images/kokito-birthday-pass-template.png';
+        
+        // Timeout after 3 seconds
+        setTimeout(() => reject(new Error('Image load timeout')), 3000);
+      });
+    }
+
+    // Method 2: Manual recreation with exact design
+    async function downloadManualRecreation() {
+      return new Promise((resolve, reject) => {
+        try {
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+          canvas.width = 1080;
+          canvas.height = 1350;
+          
+          // Create a solid background that matches your image
+          // Since your image has a pink/magenta background, use that color
+          ctx.fillStyle = '#E6007E';
+          ctx.fillRect(0, 0, 1080, 1350);
+          
+          // ONLY add the dynamic elements - NO TEXT AT ALL
+          // Your image already has all the text
+          addDynamicElements(ctx);
+          
+          canvas.toBlob(function(blob) {
+            if (blob) {
+              downloadBlob(blob, 'CLEAN_VERSION');
+              resolve();
+            } else {
+              reject(new Error('Failed to create blob'));
+            }
+          }, 'image/png', 1.0);
+          
+        } catch (error) {
+          reject(error);
+        }
+      });
+    }
+
+    // Method 3: Simple fallback
+    function downloadBasicFallback() {
+      try {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = 1080;
+        canvas.height = 1350;
+        
+        // Simple solid background matching your image color
+        ctx.fillStyle = '#E6007E';
+        ctx.fillRect(0, 0, 1080, 1350);
+        
+        // ONLY add essential dynamic elements - NO TEXT
+        addDynamicElements(ctx);
+        
+        canvas.toBlob(function(blob) {
+          if (blob) {
+            downloadBlob(blob, 'BASIC_CLEAN');
+          } else {
+            alert('❌ No se pudo crear ninguna versión. Recomendación: Ejecuta desde un servidor HTTP local.');
+          }
+        }, 'image/png', 1.0);
+        
+      } catch (error) {
+        console.error('❌ Basic fallback failed:', error);
+        alert('❌ Error crítico. Para solucionarlo:\n\n1. Usa un servidor HTTP local (Live Server, XAMPP, etc.)\n2. O toma captura de pantalla del pase\n\nEl problema es que estás ejecutando desde file:// en lugar de http://');
+      }
+    }
+
+    // New pass functionality
+    document.getElementById('newPassBtn').addEventListener('click', function() {
+      document.getElementById('successContainer').style.display = 'none';
+      document.getElementById('formContainer').style.display = 'block';
+      document.getElementById('birthdayForm').reset();
+      window.fullPassCanvas = null;
+    });
+
+    // Add CSS for confetti animation
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes fall {
+        0% {
+          transform: translateY(-50px) rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(100vh) rotate(360deg);
+          opacity: 0;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+
+  </script>
+
+</body>
+</html>
