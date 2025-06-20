@@ -1,946 +1,1249 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Regalo de Cumpleaños – Kokito Star</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tatuajes Kokito - Beneficio de Cumpleaños</title>
+    <meta name="description" content="Celebra tu cumpleaños con Tatuajes Kokito. Registrate y recibe un tatuaje gratis en tu día especial.">
     
-    body {
-      font-family: 'Montserrat', sans-serif;
-      background: linear-gradient(135deg, #E6007E 0%, #FF6B9D 100%);
-      margin: 0;
-      padding: 20px;
-      color: #1D1D1B;
-      min-height: 100vh;
-    }
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
     
-    .container {
-      max-width: 500px;
-      margin: 0 auto;
-    }
-    
-    .logo {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    
-    .logo h1 {
-      color: white;
-      font-size: 2.5em;
-      font-weight: 700;
-      margin: 0;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-    }
-    
-    .logo p {
-      color: white;
-      opacity: 0.9;
-      margin: 10px 0 0 0;
-      font-size: 1.1em;
-    }
-    
-    .form-container {
-      background: white;
-      padding: 40px 30px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      backdrop-filter: blur(10px);
-    }
-    
-    .form-title {
-      color: #E6007E;
-      text-align: center;
-      margin-bottom: 30px;
-      font-size: 1.5em;
-      font-weight: 600;
-    }
-    
-    .input-group {
-      margin-bottom: 20px;
-    }
-    
-    label {
-      display: block;
-      margin-bottom: 5px;
-      color: #333;
-      font-weight: 600;
-      font-size: 0.9em;
-    }
-    
-    input, select {
-      width: 100%;
-      padding: 15px;
-      border-radius: 10px;
-      border: 2px solid #e0e0e0;
-      font-size: 16px;
-      font-family: 'Montserrat', sans-serif;
-      transition: all 0.3s ease;
-    }
-    
-    input:focus, select:focus {
-      outline: none;
-      border-color: #E6007E;
-      box-shadow: 0 0 0 3px rgba(230, 0, 126, 0.1);
-    }
-    
-    .submit-btn {
-      width: 100%;
-      background: linear-gradient(135deg, #E6007E 0%, #FF6B9D 100%);
-      color: white;
-      border: none;
-      padding: 18px;
-      border-radius: 12px;
-      font-size: 18px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      margin-top: 20px;
-      font-family: 'Montserrat', sans-serif;
-    }
-    
-    .submit-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(230, 0, 126, 0.3);
-    }
-    
-    .submit-btn:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-      transform: none;
-    }
-    
-    .error-message {
-      color: #ff4757;
-      font-size: 0.9em;
-      margin-top: 5px;
-      display: none;
-    }
-    
-    .success-container {
-      display: none;
-      text-align: center;
-      background: white;
-      padding: 40px 30px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    }
-    
-    .success-animation {
-      font-size: 4em;
-      margin-bottom: 20px;
-      animation: bounce 1s infinite alternate;
-    }
-    
-    @keyframes bounce {
-      from { transform: translateY(0px); }
-      to { transform: translateY(-10px); }
-    }
-    
-    .pass-preview {
-      max-width: 300px;
-      margin: 20px auto;
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-    }
-    
-    .download-btn {
-      background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-      color: white;
-      border: none;
-      padding: 15px 30px;
-      border-radius: 10px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      margin: 10px;
-      transition: all 0.3s ease;
-    }
-    
-    .download-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
-    }
-    
-    .new-pass-btn {
-      background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
-      color: white;
-      border: none;
-      padding: 15px 30px;
-      border-radius: 10px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      margin: 10px;
-      transition: all 0.3s ease;
-    }
-    
-    .new-pass-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(108, 117, 125, 0.3);
-    }
-    
-    #birthdayPass {
-      position: absolute;
-      left: -5000px;
-      top: 0;
-      width: 1080px;
-      height: 1350px;
-      background-image: url('assets/images/kokito-birthday-pass-template.png');
-      background-size: 1080px 1350px;
-      background-repeat: no-repeat;
-      background-position: 0 0;
-    }
-    
-    .pass-element {
-      position: absolute;
-      font-family: 'Montserrat', sans-serif;
-    }
-    
-    .pass-qr {
-      left: 277.93px;
-      top: 971.48px;
-      width: 178.77px;
-      height: 178.77px;
-    }
-    
-    .pass-code {
-      left: 539px;
-      top: 1058.68px;
-      width: 295.63px;
-      height: 29.38px;
-      font-size: 28px;
-      font-weight: 700;
-      color: #000000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: rgba(255, 255, 255, 0.9);
-      border-radius: 8px;
-      text-shadow: none;
-    }
-    
-    .pass-valid {
-      left: 435.60px;
-      top: 1179.57px;
-      width: 119.43px;
-      height: 21.91px;
-      font-size: 18px;
-      font-weight: 600;
-      color: #000000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: rgba(255, 255, 255, 0.9);
-      border-radius: 6px;
-      text-shadow: none;
-    }
-    
-    .loading {
-      display: none;
-      text-align: center;
-      padding: 20px;
-    }
-    
-    .spinner {
-      border: 4px solid #f3f3f3;
-      border-top: 4px solid #E6007E;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      animation: spin 1s linear infinite;
-      margin: 0 auto;
-    }
-    
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-    
-    .birthday-decoration {
-      position: fixed;
-      pointer-events: none;
-      z-index: -1;
-    }
-  </style>
+    <!-- Custom CSS -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+        
+        :root {
+            --kokito-purple-primary: #a855f7;
+            --kokito-purple-light: #e9d5ff;
+            --kokito-purple-dark: #7c3aed;
+            --kokito-pink: #ec4899;
+            --kokito-success: #059669;
+            --kokito-error: #dc2626;
+            --kokito-info: #0284c7;
+            --kokito-warning: #ff8c00;
+            --kokito-text-primary: #1f2937;
+            --kokito-text-secondary: #6b7280;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+            min-height: 100vh;
+            color: var(--kokito-text-primary);
+            position: relative;
+        }
+
+        .glitter-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .glitter-container::before,
+        .glitter-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #ffd700, transparent),
+                radial-gradient(2px 2px at 40px 70px, #ffffff, transparent),
+                radial-gradient(1px 1px at 90px 40px, #ffd700, transparent),
+                radial-gradient(1px 1px at 130px 80px, #ffffff, transparent),
+                radial-gradient(2px 2px at 160px 30px, #ffd700, transparent);
+            background-repeat: repeat;
+            background-size: 200px 100px;
+            animation: glitter 4s linear infinite;
+        }
+
+        .glitter-container::after {
+            background-image: 
+                radial-gradient(1px 1px at 60px 20px, #ffffff, transparent),
+                radial-gradient(2px 2px at 110px 50px, #ffd700, transparent),
+                radial-gradient(1px 1px at 170px 90px, #ffffff, transparent),
+                radial-gradient(2px 2px at 10px 60px, #ffd700, transparent),
+                radial-gradient(1px 1px at 80px 10px, #ffffff, transparent);
+            animation: glitter 6s linear infinite reverse;
+        }
+
+        @keyframes glitter {
+            0% { transform: translateX(-200px); }
+            100% { transform: translateX(200px); }
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--kokito-purple-primary) 0%, var(--kokito-pink) 50%, var(--kokito-success) 100%);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(168, 85, 247, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(168, 85, 247, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .form-input {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 14px 16px;
+            color: white;
+            width: 100%;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--kokito-purple-primary);
+            box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .logo-mobile {
+            width: 120px;
+            height: auto;
+        }
+
+        .logo-desktop {
+            width: 220px;
+            height: auto;
+        }
+
+        @media (max-width: 768px) {
+            .logo-desktop {
+                width: 120px;
+            }
+        }
+
+        .main-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .terms-section {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+
+        .age-warning {
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            border-radius: 8px;
+            padding: 12px;
+            margin: 12px 0;
+        }
+    </style>
 </head>
 <body>
-
-  <div class="container">
-    <div class="logo">
-      <h1>KOKITO STAR</h1>
-      <p>🎨 Tu regalo de cumpleaños te espera</p>
-    </div>
-
-    <div class="form-container" id="formContainer">
-      <h2 class="form-title">¡Reclama tu tatuaje gratis! 🎂</h2>
-      <form id="birthdayForm">
-        <div class="input-group">
-          <label for="fullName">Nombre completo *</label>
-          <input type="text" id="fullName" name="fullName" required>
-          <div class="error-message" id="fullNameError"></div>
-        </div>
-
-        <div class="input-group">
-          <label for="birthDate">Fecha de nacimiento *</label>
-          <input type="date" id="birthDate" name="birthDate" required>
-          <div class="error-message" id="birthDateError"></div>
-        </div>
-
-        <div class="input-group">
-          <label for="cedula">Número de cédula *</label>
-          <input type="text" id="cedula" name="cedula" required pattern="\d+">
-          <div class="error-message" id="cedulaError"></div>
-        </div>
-
-        <div class="input-group">
-          <label for="phone">Teléfono *</label>
-          <input type="tel" id="phone" name="phone" required>
-          <div class="error-message" id="phoneError"></div>
-        </div>
-
-        <div class="input-group">
-          <label for="city">Ciudad *</label>
-          <input type="text" id="city" name="city" required>
-          <div class="error-message" id="cityError"></div>
-        </div>
-
-        <div class="input-group">
-          <label for="collaboratorCode">Código de colaboradora *</label>
-          <input type="text" id="collaboratorCode" name="collaboratorCode" required>
-          <div class="error-message" id="collaboratorCodeError"></div>
-        </div>
-
-        <button type="submit" class="submit-btn" id="submitBtn">
-          🎁 Solicitar tatuaje gratis
-        </button>
-      </form>
-    </div>
-
-    <div class="loading" id="loading">
-      <div class="spinner"></div>
-      <p>Generando tu pase de cumpleaños...</p>
-    </div>
-
-    <div class="success-container" id="successContainer">
-      <div class="success-animation">🎉</div>
-      <h2 style="color: #E6007E; margin-bottom: 10px;">¡Feliz cumpleaños!</h2>
-      <p style="color: #666; margin-bottom: 30px;">Tu pase ha sido generado exitosamente</p>
-      
-      <div class="pass-preview" id="passPreview"></div>
-      
-      <div>
-        <button class="download-btn" id="downloadBtn">
-          📥 Descargar pase
-        </button>
-        <button class="new-pass-btn" id="newPassBtn">
-          🔄 Nuevo registro
-        </button>
-      </div>
-      
-      <p style="color: #888; font-size: 0.9em; margin-top: 20px;">
-        Válido por 16 días (8 días antes y después de tu cumpleaños)
-      </p>
-    </div>
-  </div>
-
-  <!-- Hidden canvas for pass generation -->
-  <div id="birthdayPass">
-    <canvas class="pass-element pass-qr" id="qrCanvas"></canvas>
-    <div class="pass-element pass-code" id="passCode"></div>
-    <div class="pass-element pass-valid" id="passValid"></div>
-  </div>
-
-  <script>
-    // Set today's date as default
-    document.addEventListener('DOMContentLoaded', function() {
-      const today = new Date();
-      const todayString = today.toISOString().split('T')[0];
-      document.getElementById('birthDate').value = todayString;
-    });
-
-    // Valid collaborator codes (in production, this should be more secure)
-    const validCodes = ['KOK001', 'KOK002', 'KOK003', 'KOK004', 'KOK005'];
+    <div class="glitter-container"></div>
     
-    // Store registered cedulas (in production, use proper database)
-    let registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+    <div class="main-container">
+        <!-- Welcome Page -->
+        <div id="welcome-page" class="min-h-screen flex flex-col items-center justify-center text-center text-white">
+            <div class="glass-card p-8 w-full max-w-md">
+                <img id="main-logo" src="./LOGO_KOKITO.svg" alt="Kokito Logo" class="logo-desktop mx-auto mb-6 cursor-pointer">
+                
+                <h1 class="text-3xl font-bold mb-4 bg-gradient-to-r from-purple-400 via-pink-400 to-green-400 bg-clip-text text-transparent">
+                    🎉 ¡Celebra tu Cumpleaños con Nosotros! 🎉
+                </h1>
+                
+                <p class="text-lg mb-6 text-gray-300">
+                    Regístrate y recibe un <strong>tatuaje completamente GRATIS</strong> en tu día especial
+                </p>
+                
+                <div class="terms-section mb-6">
+                    <h3 class="text-sm font-semibold text-purple-400 mb-2">📋 Condiciones del Beneficio:</h3>
+                    <ul class="text-xs text-gray-300 space-y-1 text-left">
+                        <li>• Válido solo en un rango de 8 días antes y 8 días después de tu cumpleaños</li>
+                        <li>• Edad mínima: 1 año cumplido</li>
+                        <li>• Válido únicamente por un tatuaje</li>
+                        <li>• Pase intransferible</li>
+                        <li>• Presentar pase junto con documento de identidad</li>
+                        <li>• No acumulable con otras promociones</li>
+                        <li>• Solo válido en Tatuajes Kokito</li>
+                        <li>• Una sola redención por persona al año</li>
+                    </ul>
+                </div>
+                
+                <button onclick="showRegistration()" class="btn-primary mb-4 w-full">
+                    🎂 Quiero mi Tatuaje Gratis
+                </button>
+                
+                <p class="text-sm text-gray-400">
+                    ¿Ya tienes tu pase? Solo llama al tatuador con tu número registrado
+                </p>
+            </div>
+        </div>
 
-    document.getElementById('birthdayForm').addEventListener('submit', async function(e) {
-      e.preventDefault();
-      
-      if (await validateForm()) {
-        await generateBirthdayPass();
-      }
-    });
+        <!-- Registration Page -->
+        <div id="registration-page" class="min-h-screen flex flex-col items-center justify-center text-white hidden">
+            <div class="glass-card p-8 w-full max-w-md">
+                <img src="./LOGO_KOKITO.svg" alt="Kokito Logo" class="logo-desktop mx-auto mb-6">
+                
+                <h2 class="text-2xl font-bold mb-6 text-center">Registro para Beneficio</h2>
+                
+                <form id="registration-form" class="space-y-4">
+                    <div>
+                        <input type="text" id="name" placeholder="Tu nombre completo" class="form-input" required>
+                    </div>
+                    
+                    <div>
+                        <input type="tel" id="phone" placeholder="Número de teléfono (ej: 3001234567)" class="form-input" required>
+                    </div>
 
-    async function validateForm() {
-      const formData = getFormData();
-      let isValid = true;
+                    <div>
+                        <input type="email" id="email" placeholder="Correo electrónico" class="form-input" required>
+                    </div>
+                    
+                    <div>
+                        <input type="date" id="birthDate" class="form-input" required>
+                        <label class="text-sm text-gray-400 mt-1 block">Fecha de nacimiento</label>
+                        <div class="age-warning">
+                            <p class="text-yellow-200 text-xs">
+                                ⚠️ Recuerda: Solo puedes registrarte si tu cumpleaños está dentro de los próximos 8 días o ya pasó hace máximo 8 días
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <input type="text" id="collaboratorCode" placeholder="Código de colaborador (opcional)" class="form-input">
+                        <p class="text-xs text-gray-400 mt-1">Si te invitó un colaborador, ingresa su código aquí</p>
+                    </div>
+                    
+                    <div class="terms-section">
+                        <h3 class="text-sm font-semibold text-purple-400 mb-2">📋 Términos y Condiciones:</h3>
+                        <div class="text-xs text-gray-300 space-y-1 text-left max-h-32 overflow-y-auto">
+                            <p>• <strong>Elegibilidad:</strong> Edad mínima 1 año cumplido</p>
+                            <p>• <strong>Período válido:</strong> 8 días antes y 8 días después del cumpleaños</p>
+                            <p>• <strong>Beneficio:</strong> Válido únicamente por un tatuaje</p>
+                            <p>• <strong>Transferibilidad:</strong> Pase intransferible</p>
+                            <p>• <strong>Identificación:</strong> Presentar documento de identidad junto al pase</p>
+                            <p>• <strong>Exclusividad:</strong> No acumulable con otras promociones</p>
+                            <p>• <strong>Frecuencia:</strong> Una sola redención por persona al año</p>
+                            <p>• <strong>Validez:</strong> Solo en Tatuajes Kokito</p>
+                            <p>• <strong>Responsabilidad:</strong> El estudio se reserva el derecho de verificar la información</p>
+                        </div>
+                        <label class="flex items-start mt-3">
+                            <input type="checkbox" id="acceptTerms" class="mt-1 mr-2" required>
+                            <span class="text-xs text-gray-300">Acepto los términos y condiciones del beneficio de cumpleaños</span>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary w-full">
+                        🎁 Registrarme Ahora
+                    </button>
+                </form>
+                
+                <button onclick="showWelcome()" class="btn-secondary w-full mt-4">
+                    ← Volver
+                </button>
+            </div>
+        </div>
 
-      // Clear previous errors
-      document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
+        <!-- Confirmation Page -->
+        <div id="confirmation-page" class="min-h-screen flex flex-col items-center justify-center text-white hidden">
+            <div class="glass-card p-8 w-full max-w-md text-center">
+                <img src="./LOGO_KOKITO.svg" alt="Kokito Logo" class="logo-desktop mx-auto mb-6">
+                
+                <div class="text-6xl mb-4">🎉</div>
+                <h2 class="text-2xl font-bold mb-4">¡Registro Exitoso!</h2>
+                
+                <div id="pass-info" class="bg-black/30 p-4 rounded-lg mb-6">
+                    <p class="text-sm text-gray-300 mb-2">Tu pase digital:</p>
+                    <div id="pass-details" class="text-white font-mono text-sm"></div>
+                </div>
+                
+                <div class="bg-green-600/20 border border-green-600/30 rounded-lg p-4 mb-6">
+                    <p class="text-green-200 text-sm text-center">
+                        <strong>📱 ¡Captura esta pantalla!</strong><br>
+                        Guarda una foto de este pase para presentarlo en el estudio junto con tu documento de identidad
+                    </p>
+                </div>
+                
+                <div class="bg-yellow-600/20 border border-yellow-600/30 rounded-lg p-4 mb-4">
+                    <p class="text-yellow-200 text-sm">
+                        <strong>Importante:</strong><br>
+                        • Guarda tu pase y preséntalo junto con tu cédula<br>
+                        • Solo válido en el rango de fechas indicado<br>
+                        • Válido únicamente por un tatuaje<br>
+                        • Pase intransferible<br>
+                        • Tu código de pase es tu número de teléfono
+                    </p>
+                </div>
+                
+                <button onclick="showWelcome()" class="btn-secondary w-full">
+                    ← Volver al Inicio
+                </button>
+            </div>
+        </div>
 
-      // Validate full name
-      if (!formData.fullName.trim() || formData.fullName.length < 3) {
-        showError('fullNameError', 'El nombre debe tener al menos 3 caracteres');
-        isValid = false;
-      }
+        <!-- Staff Page -->
+        <div id="staff-page" class="min-h-screen flex flex-col items-center justify-center text-white hidden">
+            <div class="glass-card p-8 w-full max-w-md">
+                <img src="./LOGO_KOKITO.svg" alt="Kokito Logo" class="logo-desktop mx-auto mb-6 cursor-pointer" onclick="handleStaffLogoClick()">
+                
+                <h2 class="text-2xl font-bold mb-6 text-center">Panel de Staff</h2>
+                
+                <div class="bg-black/30 p-4 rounded-lg mb-6">
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-green-400" id="today-redemptions">0</div>
+                        <div class="text-sm text-gray-400">Canjes de hoy</div>
+                    </div>
+                </div>
+                
+                <div class="space-y-4 mb-6">
+                    <input type="tel" id="search-phone" placeholder="Buscar por teléfono" class="form-input">
+                    <button onclick="searchPassByPhone()" class="btn-primary w-full">
+                        🔍 Buscar Pase
+                    </button>
+                </div>
+                
+                <div id="pass-result" class="hidden bg-black/30 p-4 rounded-lg mb-4">
+                    <div id="customer-info"></div>
+                    <button onclick="redeemPass()" class="btn-primary w-full mt-3">
+                        ✅ Canjear Pase
+                    </button>
+                </div>
+                
+                <button onclick="showWelcome()" class="btn-secondary w-full">
+                    ← Volver al Inicio
+                </button>
+            </div>
+        </div>
 
-      // Validate birth date and birthday range
-      const birthDate = new Date(formData.birthDate);
-      const today = new Date();
-      const currentYear = today.getFullYear();
-      
-      // Create birthday for current year
-      const thisYearBirthday = new Date(currentYear, birthDate.getMonth(), birthDate.getDate());
-      
-      // Calculate days difference
-      const daysDifference = Math.abs((today - thisYearBirthday) / (1000 * 60 * 60 * 24));
-      
-      if (daysDifference > 8) {
-        showError('birthDateError', 'Solo válido 8 días antes o después de tu cumpleaños');
-        isValid = false;
-      }
+        <!-- Admin Dashboard -->
+        <div id="admin-page" class="min-h-screen flex flex-col items-center justify-center text-white hidden">
+            <div class="glass-card p-8 w-full max-w-4xl">
+                <img src="./LOGO_KOKITO.svg" alt="Kokito Logo" class="logo-desktop mx-auto mb-6">
+                
+                <h2 class="text-2xl font-bold mb-6 text-center">Panel de Administración</h2>
+                
+                <!-- Stats Overview -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div class="bg-green-600/20 border border-green-600/30 rounded-lg p-4 text-center">
+                        <div class="text-2xl font-bold text-green-400" id="total-active">0</div>
+                        <div class="text-sm text-gray-400">Pases Activos</div>
+                    </div>
+                    <div class="bg-blue-600/20 border border-blue-600/30 rounded-lg p-4 text-center">
+                        <div class="text-2xl font-bold text-blue-400" id="total-redeemed">0</div>
+                        <div class="text-sm text-gray-400">Pases Redimidos</div>
+                    </div>
+                    <div class="bg-yellow-600/20 border border-yellow-600/30 rounded-lg p-4 text-center">
+                        <div class="text-2xl font-bold text-yellow-400" id="total-expired">0</div>
+                        <div class="text-sm text-gray-400">Pases Expirados</div>
+                    </div>
+                </div>
 
-      // Validate cedula (numbers only, not empty, not already registered)
-      if (!/^\d+$/.test(formData.cedula)) {
-        showError('cedulaError', 'La cédula debe contener solo números');
-        isValid = false;
-      } else if (registeredUsers.includes(formData.cedula)) {
-        showError('cedulaError', 'Esta cédula ya ha sido registrada');
-        isValid = false;
-      }
+                <!-- Filter Tabs -->
+                <div class="flex space-x-2 mb-6">
+                    <button onclick="filterPasses('all')" class="btn-secondary text-sm" id="filter-all">Todos</button>
+                    <button onclick="filterPasses('active')" class="btn-secondary text-sm" id="filter-active">Activos</button>
+                    <button onclick="filterPasses('redeemed')" class="btn-secondary text-sm" id="filter-redeemed">Redimidos</button>
+                    <button onclick="filterPasses('expired')" class="btn-secondary text-sm" id="filter-expired">Expirados</button>
+                </div>
 
-      // Validate phone
-      if (!formData.phone.trim() || formData.phone.length < 7) {
-        showError('phoneError', 'Ingresa un teléfono válido');
-        isValid = false;
-      }
+                <!-- Passes List -->
+                <div class="bg-black/30 rounded-lg p-4 max-h-96 overflow-y-auto mb-6">
+                    <div id="passes-list" class="space-y-3">
+                        <!-- Passes will be dynamically loaded here -->
+                    </div>
+                </div>
+                
+                <div class="flex space-x-4">
+                    <button onclick="exportData()" class="btn-primary">
+                        📊 Exportar Datos
+                    </button>
+                    <button onclick="showStaff()" class="btn-secondary">
+                        ← Volver a Staff
+                    </button>
+                    <button onclick="logout()" class="btn-secondary">
+                        🚪 Cerrar Sesión
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-      // Validate city
-      if (!formData.city.trim()) {
-        showError('cityError', 'La ciudad es requerida');
-        isValid = false;
-      }
+    <!-- Loading Modal -->
+    <div id="loading-modal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
+        <div class="glass-card p-6 text-center text-white">
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
+            <p>Procesando...</p>
+        </div>
+    </div>
 
-      // Validate collaborator code
-      if (!validCodes.includes(formData.collaboratorCode.toUpperCase())) {
-        showError('collaboratorCodeError', 'Código de colaboradora inválido');
-        isValid = false;
-      }
+    <!-- Toast Notification -->
+    <div id="toast" class="toast glass-card p-4 text-white">
+        <div class="flex items-center">
+            <div id="toast-icon" class="mr-3 text-xl"></div>
+            <div>
+                <div id="toast-title" class="font-semibold"></div>
+                <div id="toast-message" class="text-sm opacity-90"></div>
+            </div>
+        </div>
+    </div>
 
-      return isValid;
-    }
+    <script>
+        // Global variables
+        let currentPass = null;
+        let logoClickCount = 0;
+        let logoClickTimer = null;
+        let allPasses = []; // Store all passes for staff view
+        let isAuthenticated = false;
 
-    function getFormData() {
-      return {
-        fullName: document.getElementById('fullName').value,
-        birthDate: document.getElementById('birthDate').value,
-        cedula: document.getElementById('cedula').value,
-        phone: document.getElementById('phone').value,
-        city: document.getElementById('city').value,
-        collaboratorCode: document.getElementById('collaboratorCode').value
-      };
-    }
-
-    function showError(elementId, message) {
-      const errorEl = document.getElementById(elementId);
-      errorEl.textContent = message;
-      errorEl.style.display = 'block';
-    }
-
-    async function generateBirthdayPass() {
-      const formData = getFormData();
-      
-      // Show loading
-      document.getElementById('formContainer').style.display = 'none';
-      document.getElementById('loading').style.display = 'block';
-
-      // Generate unique code and store globally
-      const uniqueCode = generateUniqueCode();
-      window.currentUniqueCode = uniqueCode;
-      
-      const qrData = `https://kokitostar.com/validate/${uniqueCode}`;
-      
-      // Calculate valid until date (8 days after birthday)
-      const birthDate = new Date(formData.birthDate);
-      const currentYear = new Date().getFullYear();
-      const thisYearBirthday = new Date(currentYear, birthDate.getMonth(), birthDate.getDate());
-      const validUntil = new Date(thisYearBirthday);
-      validUntil.setDate(validUntil.getDate() + 8);
-      window.currentValidUntil = validUntil.toLocaleDateString('es-ES');
-
-      // Save data (in production, send to Google Sheets)
-      const userData = {
-        ...formData,
-        uniqueCode,
-        generatedAt: new Date().toISOString(),
-        validUntil: validUntil.toISOString()
-      };
-      
-      await saveUserData(userData);
-
-      // Add cedula to registered users
-      registeredUsers.push(formData.cedula);
-      localStorage.setItem('registeredUsers', JSON.stringify(registeredUsers));
-
-      // Generate pass image directly
-      setTimeout(async () => {
-        await createPassImage();
-        
-        // Hide loading, show success
-        document.getElementById('loading').style.display = 'none';
-        document.getElementById('successContainer').style.display = 'block';
-        
-        // Add celebration effect
-        createCelebrationEffect();
-      }, 2000);
-    }
-
-    function generateUniqueCode() {
-      const timestamp = Date.now().toString().slice(-6);
-      const random = Math.random().toString(36).substr(2, 4).toUpperCase();
-      return `KOK${timestamp}${random}`;
-    }
-
-    async function saveUserData(userData) {
-      // In production, integrate with Google Sheets API
-      console.log('Saving user data:', userData);
-      
-      // Simulate API call
-      return new Promise(resolve => {
-        setTimeout(() => {
-          console.log('Data saved successfully');
-          resolve();
-        }, 1000);
-      });
-    }
-
-    async function createPassImage() {
-      return new Promise((resolve) => {
-        try {
-          // Create canvas manually to avoid tainted canvas issues
-          const canvas = document.createElement('canvas');
-          const ctx = canvas.getContext('2d');
-          canvas.width = 1080;
-          canvas.height = 1350;
-          
-          // Load the background image correctly
-          const img = new Image();
-          img.onload = function() {
-            console.log('Background image loaded successfully');
-            
-            // Draw the background image
-            ctx.drawImage(img, 0, 0, 1080, 1350);
-            
-            // Get form data for positioning
-            const formData = getFormData();
-            const uniqueCode = window.currentUniqueCode;
-            const validUntil = window.currentValidUntil;
-            
-            // Draw QR code
-            const qrCanvas = document.createElement('canvas');
-            const qr = new QRious({
-              element: qrCanvas,
-              value: `https://kokitostar.com/validate/${uniqueCode}`,
-              size: 179,
-              background: 'white',
-              foreground: '#000000'
-            });
-            ctx.drawImage(qrCanvas, 277.93, 971.48, 178.77, 178.77);
-            
-            // Draw white backgrounds for text
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
-            ctx.fillRect(539, 1058.68, 295.63, 29.38);
-            ctx.fillRect(435.60, 1179.57, 119.43, 21.91);
-            
-            // Draw code text
-            ctx.fillStyle = '#000000';
-            ctx.font = 'bold 28px Montserrat, sans-serif';
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.fillText(uniqueCode, 539 + 295.63/2, 1058.68 + 29.38/2);
-            
-            // Draw valid until text
-            ctx.font = 'bold 18px Montserrat, sans-serif';
-            ctx.fillText(validUntil, 435.60 + 119.43/2, 1179.57 + 21.91/2);
-            
-            // Create preview
-            const previewContainer = document.getElementById('passPreview');
-            const previewCanvas = document.createElement('canvas');
-            const previewCtx = previewCanvas.getContext('2d');
-            
-            const maxWidth = 300;
-            const scale = maxWidth / 1080;
-            previewCanvas.width = 1080 * scale;
-            previewCanvas.height = 1350 * scale;
-            
-            previewCtx.drawImage(canvas, 0, 0, previewCanvas.width, previewCanvas.height);
-            
-            previewContainer.innerHTML = '';
-            previewContainer.appendChild(previewCanvas);
-            
-            // Store canvas for download (this will be tainted, so we create a clean version)
-            window.fullPassCanvas = canvas;
-            window.needsCleanCanvas = true; // Flag to create clean version on download
-            resolve();
-          };
-          
-          img.onerror = function() {
-            console.error('Error loading background image, using fallback');
-            // Fallback to gradient if image fails to load
-            const gradient = ctx.createLinearGradient(0, 0, 1080, 1350);
-            gradient.addColorStop(0, '#E6007E');
-            gradient.addColorStop(1, '#FF6B9D');
-            ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, 1080, 1350);
-            
-            // Continue with rest of elements
-            const formData = getFormData();
-            const uniqueCode = window.currentUniqueCode;
-            const validUntil = window.currentValidUntil;
-            
-            const qrCanvas = document.createElement('canvas');
-            const qr = new QRious({
-              element: qrCanvas,
-              value: `https://kokitostar.com/validate/${uniqueCode}`,
-              size: 179,
-              background: 'white',
-              foreground: '#000000'
-            });
-            ctx.drawImage(qrCanvas, 277.93, 971.48, 178.77, 178.77);
-            
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
-            ctx.fillRect(539, 1058.68, 295.63, 29.38);
-            ctx.fillRect(435.60, 1179.57, 119.43, 21.91);
-            
-            ctx.fillStyle = '#000000';
-            ctx.font = 'bold 28px Montserrat, sans-serif';
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.fillText(uniqueCode, 539 + 295.63/2, 1058.68 + 29.38/2);
-            
-            ctx.font = 'bold 18px Montserrat, sans-serif';
-            ctx.fillText(validUntil, 435.60 + 119.43/2, 1179.57 + 21.91/2);
-            
-            const previewContainer = document.getElementById('passPreview');
-            const previewCanvas = document.createElement('canvas');
-            const previewCtx = previewCanvas.getContext('2d');
-            
-            const maxWidth = 300;
-            const scale = maxWidth / 1080;
-            previewCanvas.width = 1080 * scale;
-            previewCanvas.height = 1350 * scale;
-            
-            previewCtx.drawImage(canvas, 0, 0, previewCanvas.width, previewCanvas.height);
-            
-            previewContainer.innerHTML = '';
-            previewContainer.appendChild(previewCanvas);
-            
-            window.fullPassCanvas = canvas;
-            window.needsCleanCanvas = false; // Gradient canvas is clean
-            resolve();
-          };
-          
-          // Load your real image
-          img.src = 'assets/images/kokito-birthday-pass-template.png';
-          
-        } catch (error) {
-          console.error('Error generating pass image:', error);
-          alert('Error al generar la imagen. Por favor, intenta nuevamente.');
-          resolve();
-        }
-      });
-    }
-
-    // Function to create a clean canvas without external images for download
-    function createCleanCanvasForDownload() {
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
-      canvas.width = 1080;
-      canvas.height = 1350;
-      
-      // Create gradient background (clean, no external images)
-      const gradient = ctx.createLinearGradient(0, 0, 1080, 1350);
-      gradient.addColorStop(0, '#E6007E');
-      gradient.addColorStop(1, '#FF6B9D');
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, 1080, 1350);
-      
-      // Add only the dynamic elements (QR, code, valid until)
-      const uniqueCode = window.currentUniqueCode;
-      const validUntil = window.currentValidUntil;
-      
-      // Add QR code at exact position
-      const qrCanvas = document.createElement('canvas');
-      const qr = new QRious({
-        element: qrCanvas,
-        value: `https://kokitostar.com/validate/${uniqueCode}`,
-        size: 179,
-        background: 'white',
-        foreground: '#000000'
-      });
-      ctx.drawImage(qrCanvas, 277.93, 971.48, 178.77, 178.77);
-      
-      // Draw white backgrounds for text at exact positions
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
-      ctx.fillRect(539, 1058.68, 295.63, 29.38);
-      ctx.fillRect(435.60, 1179.57, 119.43, 21.91);
-      
-      // Draw code text at exact position
-      ctx.fillStyle = '#000000';
-      ctx.font = 'bold 28px Arial, sans-serif';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText(uniqueCode, 539 + 295.63/2, 1058.68 + 29.38/2);
-      
-      // Draw valid until text at exact position
-      ctx.font = 'bold 18px Arial, sans-serif';
-      ctx.fillText(validUntil, 435.60 + 119.43/2, 1179.57 + 21.91/2);
-      
-      return canvas;
-    }
-
-    function createCelebrationEffect() {
-      const colors = ['#E6007E', '#FF6B9D', '#FFD700', '#FF69B4'];
-      
-      for (let i = 0; i < 20; i++) {
-        setTimeout(() => {
-          const confetti = document.createElement('div');
-          confetti.innerHTML = ['🎉', '🎂', '🎈', '⭐'][Math.floor(Math.random() * 4)];
-          confetti.style.position = 'fixed';
-          confetti.style.left = Math.random() * 100 + 'vw';
-          confetti.style.top = '-50px';
-          confetti.style.fontSize = '2em';
-          confetti.style.pointerEvents = 'none';
-          confetti.style.zIndex = '1000';
-          confetti.style.animation = 'fall 3s linear forwards';
-          
-          document.body.appendChild(confetti);
-          
-          setTimeout(() => {
-            confetti.remove();
-          }, 3000);
-        }, i * 200);
-      }
-    }
-
-    // Helper function to add dynamic elements to any canvas context (moved up)
-    function addDynamicElements(ctx) {
-      const uniqueCode = window.currentUniqueCode;
-      const validUntil = window.currentValidUntil;
-      
-      // Add QR code
-      const qrCanvas = document.createElement('canvas');
-      const qr = new QRious({
-        element: qrCanvas,
-        value: `https://kokitostar.com/validate/${uniqueCode}`,
-        size: 179,
-        background: 'white',
-        foreground: '#000000'
-      });
-      ctx.drawImage(qrCanvas, 277.93, 971.48, 178.77, 178.77);
-      
-      // Add backgrounds
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
-      ctx.fillRect(539, 1058.68, 295.63, 29.38);
-      ctx.fillRect(435.60, 1179.57, 119.43, 21.91);
-      
-      // Add text
-      ctx.fillStyle = '#000000';
-      ctx.font = 'bold 28px Arial, sans-serif';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText(uniqueCode, 539 + 295.63/2, 1058.68 + 29.38/2);
-      
-      ctx.font = 'bold 18px Arial, sans-serif';
-      ctx.fillText(validUntil, 435.60 + 119.43/2, 1179.57 + 21.91/2);
-    }
-
-    // Helper function to download blob
-    function downloadBlob(blob, strategy) {
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      const formData = getFormData();
-      const filename = `KOKITO_PASS_${strategy}_${formData.fullName.replace(/\s+/g, '_')}_${Date.now()}.png`;
-      link.download = filename;
-      link.href = url;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
-      console.log(`✅ Download successful with ${strategy}`);
-    }
-
-    // FIXED DOWNLOAD APPROACH FOR LOCAL FILES
-    document.getElementById('downloadBtn').addEventListener('click', async function() {
-      console.log('=== DIAGNOSTICS ===');
-      console.log('🟡 PROBLEM IDENTIFIED: Running from file:// protocol');
-      console.log('🟡 CORS blocks local file access');
-      console.log('🟡 Solution: Using workarounds for local development');
-      
-      // For local file:// protocol, we need different approaches
-      
-      // Method 1: Try to use the image via HTML img element (sometimes works locally)
-      try {
-        console.log('=== METHOD 1: HTML Image Element ===');
-        await downloadWithHtmlImage();
-        return;
-      } catch (error) {
-        console.log('❌ Method 1 failed:', error.message);
-      }
-      
-      // Method 2: Manual recreation (guaranteed to work)
-      try {
-        console.log('=== METHOD 2: Manual Recreation ===');
-        await downloadManualRecreation();
-        return;
-      } catch (error) {
-        console.log('❌ Method 2 failed:', error.message);
-      }
-      
-      // Method 3: Basic fallback
-      console.log('=== METHOD 3: Basic Fallback ===');
-      downloadBasicFallback();
-    });
-
-    // Method 1: Try HTML image element (sometimes bypasses CORS locally)
-    async function downloadWithHtmlImage() {
-      return new Promise((resolve, reject) => {
-        const img = document.createElement('img');
-        
-        img.onload = function() {
-          try {
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            canvas.width = 1080;
-            canvas.height = 1350;
-            
-            // Draw the image
-            ctx.drawImage(img, 0, 0, 1080, 1350);
-            
-            // Add dynamic elements
-            addDynamicElements(ctx);
-            
-            // Try to download
-            canvas.toBlob(function(blob) {
-              if (blob) {
-                downloadBlob(blob, 'HTML_IMAGE');
-                resolve();
-              } else {
-                reject(new Error('Failed to create blob'));
-              }
-            }, 'image/png', 1.0);
-            
-          } catch (error) {
-            reject(error);
-          }
-        };
-        
-        img.onerror = () => reject(new Error('Image load failed'));
-        
-        // Try loading the image
-        img.src = 'assets/images/kokito-birthday-pass-template.png';
-        
-        // Timeout after 3 seconds
-        setTimeout(() => reject(new Error('Image load timeout')), 3000);
-      });
-    }
-
-    // Method 2: Manual recreation with exact design
-    async function downloadManualRecreation() {
-      return new Promise((resolve, reject) => {
-        try {
-          const canvas = document.createElement('canvas');
-          const ctx = canvas.getContext('2d');
-          canvas.width = 1080;
-          canvas.height = 1350;
-          
-          // Create a solid background that matches your image
-          // Since your image has a pink/magenta background, use that color
-          ctx.fillStyle = '#E6007E';
-          ctx.fillRect(0, 0, 1080, 1350);
-          
-          // ONLY add the dynamic elements - NO TEXT AT ALL
-          // Your image already has all the text
-          addDynamicElements(ctx);
-          
-          canvas.toBlob(function(blob) {
-            if (blob) {
-              downloadBlob(blob, 'CLEAN_VERSION');
-              resolve();
-            } else {
-              reject(new Error('Failed to create blob'));
+        // Set default date to today
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date();
+            const formattedDate = today.toISOString().split('T')[0];
+            const birthDateInput = document.getElementById('birthDate');
+            if (birthDateInput) {
+                birthDateInput.value = formattedDate;
             }
-          }, 'image/png', 1.0);
-          
-        } catch (error) {
-          reject(error);
+        });
+
+        // Date validation functions
+        function isWithinBirthdayRange(birthDate) {
+            const today = new Date();
+            const birth = new Date(birthDate);
+            
+            // Create dates with current year for comparison
+            const currentYearBirthday = new Date(today.getFullYear(), birth.getMonth(), birth.getDate());
+            
+            // Calculate the date range (8 days before and after)
+            const startRange = new Date(currentYearBirthday);
+            startRange.setDate(startRange.getDate() - 8);
+            
+            const endRange = new Date(currentYearBirthday);
+            endRange.setDate(endRange.getDate() + 8);
+            
+            // Check if today is within the range
+            return today >= startRange && today <= endRange;
         }
-      });
-    }
 
-    // Method 3: Simple fallback
-    function downloadBasicFallback() {
-      try {
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = 1080;
-        canvas.height = 1350;
-        
-        // Simple solid background matching your image color
-        ctx.fillStyle = '#E6007E';
-        ctx.fillRect(0, 0, 1080, 1350);
-        
-        // ONLY add essential dynamic elements - NO TEXT
-        addDynamicElements(ctx);
-        
-        canvas.toBlob(function(blob) {
-          if (blob) {
-            downloadBlob(blob, 'BASIC_CLEAN');
-          } else {
-            alert('❌ No se pudo crear ninguna versión. Recomendación: Ejecuta desde un servidor HTTP local.');
-          }
-        }, 'image/png', 1.0);
-        
-      } catch (error) {
-        console.error('❌ Basic fallback failed:', error);
-        alert('❌ Error crítico. Para solucionarlo:\n\n1. Usa un servidor HTTP local (Live Server, XAMPP, etc.)\n2. O toma captura de pantalla del pase\n\nEl problema es que estás ejecutando desde file:// en lugar de http://');
-      }
-    }
-
-    // New pass functionality
-    document.getElementById('newPassBtn').addEventListener('click', function() {
-      document.getElementById('successContainer').style.display = 'none';
-      document.getElementById('formContainer').style.display = 'block';
-      document.getElementById('birthdayForm').reset();
-      window.fullPassCanvas = null;
-    });
-
-    // Add CSS for confetti animation
-    const style = document.createElement('style');
-    style.textContent = `
-      @keyframes fall {
-        0% {
-          transform: translateY(-50px) rotate(0deg);
-          opacity: 1;
+        function calculateAge(birthDate) {
+            const today = new Date();
+            const birth = new Date(birthDate);
+            let age = today.getFullYear() - birth.getFullYear();
+            const monthDiff = today.getMonth() - birth.getMonth();
+            
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+                age--;
+            }
+            
+            return age;
         }
-        100% {
-          transform: translateY(100vh) rotate(360deg);
-          opacity: 0;
+
+        function getBirthdayRangeText(birthDate) {
+            const birth = new Date(birthDate);
+            const today = new Date();
+            const currentYearBirthday = new Date(today.getFullYear(), birth.getMonth(), birth.getDate());
+            
+            const startRange = new Date(currentYearBirthday);
+            startRange.setDate(startRange.getDate() - 8);
+            
+            const endRange = new Date(currentYearBirthday);
+            endRange.setDate(endRange.getDate() + 8);
+            
+            return `${startRange.toLocaleDateString('es-ES')} - ${endRange.toLocaleDateString('es-ES')}`;
         }
-      }
-    `;
-    document.head.appendChild(style);
 
-  </script>
+        // Navigation functions
+        function showWelcome() {
+            document.getElementById('welcome-page').classList.remove('hidden');
+            document.getElementById('registration-page').classList.add('hidden');
+            document.getElementById('confirmation-page').classList.add('hidden');
+            document.getElementById('staff-page').classList.add('hidden');
+            document.getElementById('admin-page').classList.add('hidden');
+        }
 
+        function showRegistration() {
+            document.getElementById('welcome-page').classList.add('hidden');
+            document.getElementById('registration-page').classList.remove('hidden');
+            document.getElementById('confirmation-page').classList.add('hidden');
+            document.getElementById('staff-page').classList.add('hidden');
+            document.getElementById('admin-page').classList.add('hidden');
+        }
+
+        function showConfirmation() {
+            document.getElementById('welcome-page').classList.add('hidden');
+            document.getElementById('registration-page').classList.add('hidden');
+            document.getElementById('confirmation-page').classList.remove('hidden');
+            document.getElementById('staff-page').classList.add('hidden');
+            document.getElementById('admin-page').classList.add('hidden');
+        }
+
+        function showStaff() {
+            document.getElementById('welcome-page').classList.add('hidden');
+            document.getElementById('registration-page').classList.add('hidden');
+            document.getElementById('confirmation-page').classList.add('hidden');
+            document.getElementById('staff-page').classList.remove('hidden');
+            document.getElementById('admin-page').classList.add('hidden');
+            loadStats();
+        }
+
+        function showAdmin() {
+            document.getElementById('welcome-page').classList.add('hidden');
+            document.getElementById('registration-page').classList.add('hidden');
+            document.getElementById('confirmation-page').classList.add('hidden');
+            document.getElementById('staff-page').classList.add('hidden');
+            document.getElementById('admin-page').classList.remove('hidden');
+            loadAdminData();
+        }
+
+        // Logo click handler for staff access
+        function handleLogoClick() {
+            logoClickCount++;
+            
+            if (logoClickTimer) {
+                clearTimeout(logoClickTimer);
+            }
+            
+            logoClickTimer = setTimeout(() => {
+                logoClickCount = 0;
+            }, 2000);
+            
+            if (logoClickCount === 3) {
+                logoClickCount = 0;
+                clearTimeout(logoClickTimer);
+                showStaff();
+            }
+        }
+
+        // Staff logo click handler for admin access
+        function handleStaffLogoClick() {
+            logoClickCount++;
+            
+            if (logoClickTimer) {
+                clearTimeout(logoClickTimer);
+            }
+            
+            logoClickTimer = setTimeout(() => {
+                logoClickCount = 0;
+            }, 2000);
+            
+            if (logoClickCount === 3) {
+                logoClickCount = 0;
+                clearTimeout(logoClickTimer);
+                requestAuthentication();
+            }
+        }
+
+        // Authentication function
+        function requestAuthentication() {
+            const password = prompt('Ingresa el código de administrador:');
+            if (password === '8357565') {
+                isAuthenticated = true;
+                showAdmin();
+                showToast('Acceso concedido', 'Bienvenido al panel de administración', 'success');
+            } else if (password !== null) {
+                showToast('Acceso denegado', 'Código incorrecto', 'error');
+            }
+        }
+
+        // Logout function
+        function logout() {
+            isAuthenticated = false;
+            showStaff();
+            showToast('Sesión cerrada', 'Has salido del panel de administración', 'info');
+        }
+
+        // Utility functions
+        function showLoading() {
+            document.getElementById('loading-modal').classList.remove('hidden');
+        }
+
+        function hideLoading() {
+            document.getElementById('loading-modal').classList.add('hidden');
+        }
+
+        function showToast(title, message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const icon = document.getElementById('toast-icon');
+            const titleEl = document.getElementById('toast-title');
+            const messageEl = document.getElementById('toast-message');
+            
+            const icons = {
+                success: '✅',
+                error: '❌',
+                warning: '⚠️',
+                info: 'ℹ️'
+            };
+            
+            icon.textContent = icons[type];
+            titleEl.textContent = title;
+            messageEl.textContent = message;
+            
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 5000);
+        }
+
+        // Registration form handler
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('registration-form');
+            if (form) {
+                form.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    const formData = {
+                        name: document.getElementById('name').value.trim(),
+                        phone: document.getElementById('phone').value.trim(),
+                        email: document.getElementById('email').value.trim(),
+                        birthDate: document.getElementById('birthDate').value,
+                        collaboratorCode: document.getElementById('collaboratorCode').value.trim(),
+                        acceptTerms: document.getElementById('acceptTerms').checked
+                    };
+                    
+                    // Basic validation
+                    if (!formData.name || !formData.phone || !formData.email || !formData.birthDate) {
+                        showToast('Error', 'Por favor completa todos los campos obligatorios', 'error');
+                        return;
+                    }
+
+                    if (!formData.acceptTerms) {
+                        showToast('Error', 'Debes aceptar los términos y condiciones', 'error');
+                        return;
+                    }
+                    
+                    // Email validation
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(formData.email)) {
+                        showToast('Error', 'Ingresa un correo electrónico válido', 'error');
+                        return;
+                    }
+
+                    // Age validation
+                    const age = calculateAge(formData.birthDate);
+                    if (age < 1) {
+                        showToast('Error', 'La edad mínima para el beneficio es 1 año cumplido', 'error');
+                        return;
+                    }
+
+                    // Birthday range validation
+                    if (!isWithinBirthdayRange(formData.birthDate)) {
+                        showToast('Error', 'Solo puedes registrarte dentro del rango de 8 días antes y 8 días después de tu cumpleaños', 'warning');
+                        return;
+                    }
+                    
+                    showLoading();
+                    
+                    try {
+                        // Create the pass object with phone as ID
+                        const passData = {
+                            ...formData,
+                            passId: formData.phone,
+                            validRange: getBirthdayRangeText(formData.birthDate),
+                            registrationDate: new Date().toISOString(),
+                            status: 'active',
+                            id: Date.now() // Simple ID for demo
+                        };
+                        
+                        // Store in demo data
+                        allPasses.push(passData);
+                        
+                        // Simulate API call - in real implementation, this would be a server request
+                        // const response = await fetch('/api/birthday-pass', {
+                        //     method: 'POST',
+                        //     headers: {
+                        //         'Content-Type': 'application/json'
+                        //     },
+                        //     body: JSON.stringify(formData)
+                        // });
+                        
+                        // For demo purposes, simulate successful response
+                        await new Promise(resolve => setTimeout(resolve, 1500));
+                        
+                        currentPass = passData;
+                        displayPassInfo();
+                        showConfirmation();
+                        showToast('¡Éxito!', 'Registro completado correctamente', 'success');
+                        
+                    } catch (error) {
+                        showToast('Error', error.message || 'Error en el registro', 'error');
+                    } finally {
+                        hideLoading();
+                    }
+                });
+            }
+            
+            // Setup logo click handler
+            const mainLogo = document.getElementById('main-logo');
+            if (mainLogo) {
+                mainLogo.addEventListener('click', handleLogoClick);
+            }
+        });
+
+        // Display pass information
+        function displayPassInfo() {
+            if (!currentPass) return;
+            
+            const passDetails = document.getElementById('pass-details');
+            
+            passDetails.innerHTML = `
+                <div><strong>Nombre:</strong> ${currentPass.name}</div>
+                <div><strong>Teléfono:</strong> ${currentPass.phone}</div>
+                <div><strong>Email:</strong> ${currentPass.email}</div>
+                <div><strong>Código de Pase:</strong> ${currentPass.passId}</div>
+                <div><strong>Período Válido:</strong> ${currentPass.validRange}</div>
+            `;
+        }
+
+        // Pass generation functions
+        function generateBirthdayPassSVG(passData) {
+            const { name, phone, email, passId, validRange, collaboratorCode } = passData;
+            
+            return `
+                <svg width="400" height="600" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#000000;stop-opacity:1" />
+                            <stop offset="50%" style="stop-color:#1a1a1a;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#000000;stop-opacity:1" />
+                        </linearGradient>
+                        <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#a855f7;stop-opacity:1" />
+                            <stop offset="50%" style="stop-color:#ec4899;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    
+                    <rect width="400" height="600" fill="url(#bgGradient)"/>
+                    
+                    <!-- Logo placeholder -->
+                    <rect x="150" y="40" width="100" height="60" fill="#333333" rx="10"/>
+                    <text x="200" y="75" text-anchor="middle" fill="white" font-size="12" font-family="Arial, sans-serif">KOKITO</text>
+                    
+                    <!-- Title -->
+                    <rect x="20" y="130" width="360" height="3" fill="url(#accentGradient)"/>
+                    <text x="200" y="160" text-anchor="middle" fill="white" font-size="24" font-weight="bold" font-family="Arial, sans-serif">PASE DE CUMPLEAÑOS</text>
+                    <text x="200" y="185" text-anchor="middle" fill="#a855f7" font-size="16" font-family="Arial, sans-serif">🎉 TATUAJE GRATIS 🎉</text>
+                    
+                    <!-- Customer Info -->
+                    <rect x="30" y="220" width="340" height="220" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" rx="15"/>
+                    <text x="50" y="250" fill="#a855f7" font-size="14" font-weight="bold" font-family="Arial, sans-serif">BENEFICIARIO:</text>
+                    <text x="50" y="275" fill="white" font-size="16" font-weight="bold" font-family="Arial, sans-serif">${name}</text>
+                    
+                    <text x="50" y="305" fill="#a855f7" font-size="14" font-weight="bold" font-family="Arial, sans-serif">CÓDIGO DE PASE:</text>
+                    <text x="50" y="330" fill="white" font-size="16" font-family="monospace">${passId}</text>
+                    
+                    <text x="50" y="360" fill="#a855f7" font-size="14" font-weight="bold" font-family="Arial, sans-serif">TELÉFONO:</text>
+                    <text x="50" y="385" fill="white" font-size="14" font-family="Arial, sans-serif">${phone}</text>
+                    
+                    <text x="50" y="415" fill="#a855f7" font-size="14" font-weight="bold" font-family="Arial, sans-serif">PERÍODO VÁLIDO:</text>
+                    <text x="50" y="435" fill="white" font-size="12" font-family="Arial, sans-serif">${validRange}</text>
+                    
+                    <!-- Terms -->
+                    <rect x="30" y="460" width="340" height="110" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" rx="10"/>
+                    <text x="200" y="480" text-anchor="middle" fill="#ec4899" font-size="14" font-weight="bold" font-family="Arial, sans-serif">TÉRMINOS Y CONDICIONES</text>
+                    <text x="50" y="495" fill="white" font-size="9" font-family="Arial, sans-serif">• Válido solo en el período indicado arriba</text>
+                    <text x="50" y="508" fill="white" font-size="9" font-family="Arial, sans-serif">• Válido únicamente por un tatuaje</text>
+                    <text x="50" y="521" fill="white" font-size="9" font-family="Arial, sans-serif">• Pase intransferible</text>
+                    <text x="50" y="534" fill="white" font-size="9" font-family="Arial, sans-serif">• Presentar junto con documento de identidad</text>
+                    <text x="50" y="547" fill="white" font-size="9" font-family="Arial, sans-serif">• No acumulable con otras promociones</text>
+                    <text x="50" y="560" fill="white" font-size="9" font-family="Arial, sans-serif">• Una redención por persona al año</text>
+                    
+                    <!-- Footer -->
+                    <text x="200" y="585" text-anchor="middle" fill="#666666" font-size="10" font-family="Arial, sans-serif">www.tatuajeskokito.com</text>
+                </svg>
+            `;
+        }
+
+        // Screenshot capture function
+        function captureScreenshot() {
+            if (!currentPass) return;
+            
+            try {
+                // Create canvas with pass design
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                
+                // Set canvas size
+                canvas.width = 400;
+                canvas.height = 600;
+                
+                // Create gradient background
+                const gradient = ctx.createLinearGradient(0, 0, 400, 600);
+                gradient.addColorStop(0, '#1a1a2e');
+                gradient.addColorStop(0.5, '#16213e');
+                gradient.addColorStop(1, '#0f0f23');
+                
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, 400, 600);
+                
+                // Add border
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+                ctx.lineWidth = 2;
+                ctx.strokeRect(10, 10, 380, 580);
+                
+                // Draw logo placeholder (since SVG loading in canvas can be problematic)
+                ctx.fillStyle = '#333333';
+                ctx.fillRect(150, 30, 100, 60);
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+                ctx.strokeRect(150, 30, 100, 60);
+                ctx.fillStyle = 'white';
+                ctx.font = 'bold 12px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText('KOKITO', 200, 50);
+                ctx.font = '10px Arial';
+                ctx.fillText('TATTOO STUDIO', 200, 65);
+                
+                // Title section
+                ctx.fillStyle = '#a855f7';
+                ctx.font = 'bold 24px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText('PASE DE CUMPLEAÑOS', 200, 130);
+                
+                ctx.fillStyle = '#ec4899';
+                ctx.font = '18px Arial';
+                ctx.fillText('🎉 TATUAJE GRATIS 🎉', 200, 155);
+                
+                // Accent line
+                const accentGradient = ctx.createLinearGradient(30, 170, 370, 170);
+                accentGradient.addColorStop(0, '#a855f7');
+                accentGradient.addColorStop(0.5, '#ec4899');
+                accentGradient.addColorStop(1, '#059669');
+                ctx.fillStyle = accentGradient;
+                ctx.fillRect(30, 170, 340, 3);
+                
+                // Customer info section
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
+                ctx.fillRect(30, 190, 340, 220);
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+                ctx.strokeRect(30, 190, 340, 220);
+                
+                // Customer details
+                ctx.textAlign = 'left';
+                ctx.fillStyle = '#a855f7';
+                ctx.font = 'bold 14px Arial';
+                ctx.fillText('BENEFICIARIO:', 50, 220);
+                
+                ctx.fillStyle = 'white';
+                ctx.font = 'bold 16px Arial';
+                ctx.fillText(currentPass.name, 50, 245);
+                
+                ctx.fillStyle = '#a855f7';
+                ctx.font = 'bold 14px Arial';
+                ctx.fillText('CÓDIGO DE PASE:', 50, 275);
+                
+                ctx.fillStyle = 'white';
+                ctx.font = '16px monospace';
+                ctx.fillText(currentPass.passId, 50, 300);
+                
+                ctx.fillStyle = '#a855f7';
+                ctx.font = 'bold 14px Arial';
+                ctx.fillText('TELÉFONO:', 50, 330);
+                
+                ctx.fillStyle = 'white';
+                ctx.font = '14px Arial';
+                ctx.fillText(currentPass.phone, 50, 355);
+                
+                ctx.fillStyle = '#a855f7';
+                ctx.font = 'bold 14px Arial';
+                ctx.fillText('EMAIL:', 50, 380);
+                
+                ctx.fillStyle = 'white';
+                ctx.font = '12px Arial';
+                const emailText = currentPass.email.length > 25 ? currentPass.email.substring(0, 25) + '...' : currentPass.email;
+                ctx.fillText(emailText, 50, 400);
+                
+                ctx.fillStyle = '#a855f7';
+                ctx.font = 'bold 14px Arial';
+                ctx.fillText('PERÍODO VÁLIDO:', 50, 425);
+                
+                ctx.fillStyle = 'white';
+                ctx.font = '12px Arial';
+                ctx.fillText(currentPass.validRange, 50, 445);
+                
+                // Terms section
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.03)';
+                ctx.fillRect(30, 470, 340, 100);
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+                ctx.strokeRect(30, 470, 340, 100);
+                
+                ctx.fillStyle = '#ec4899';
+                ctx.font = 'bold 14px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText('TÉRMINOS Y CONDICIONES', 200, 490);
+                
+                ctx.fillStyle = 'white';
+                ctx.font = '9px Arial';
+                ctx.textAlign = 'left';
+                ctx.fillText('• Válido solo en el período indicado arriba', 50, 505);
+                ctx.fillText('• Válido únicamente por un tatuaje', 50, 518);
+                ctx.fillText('• Pase intransferible', 50, 531);
+                ctx.fillText('• Presentar junto con documento de identidad', 50, 544);
+                ctx.fillText('• No acumulable con otras promociones', 50, 557);
+                
+                // Footer
+                ctx.fillStyle = '#666666';
+                ctx.font = '10px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText('www.tatuajeskokito.com', 200, 585);
+                
+                // Download the canvas as image
+                canvas.toBlob(function(blob) {
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `pase-cumpleanos-${currentPass.passId}.png`;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                    
+                    showToast('Éxito', 'Pase guardado como imagen', 'success');
+                });
+                
+            } catch (error) {
+                console.error('Error generating screenshot:', error);
+                showToast('Error', 'No se pudo generar la imagen del pase', 'error');
+            }
+        }
+
+        // Admin functions
+        function loadAdminData() {
+            if (!isAuthenticated) {
+                showStaff();
+                return;
+            }
+
+            // Load demo data if empty
+            if (allPasses.length === 0) {
+                loadDemoData();
+            }
+
+            updateAdminStats();
+            filterPasses('all');
+        }
+
+        function loadDemoData() {
+            // Add some demo passes for testing
+            const demoDate = new Date();
+            allPasses = [
+                {
+                    id: 1,
+                    name: 'Juan Pérez',
+                    phone: '3001234567',
+                    email: 'juan@email.com',
+                    passId: '3001234567',
+                    status: 'active',
+                    validRange: getBirthdayRangeText(demoDate.toISOString().split('T')[0]),
+                    registrationDate: new Date().toISOString()
+                },
+                {
+                    id: 2,
+                    name: 'María García',
+                    phone: '3009876543',
+                    email: 'maria@email.com',
+                    passId: '3009876543',
+                    status: 'redeemed',
+                    validRange: getBirthdayRangeText(demoDate.toISOString().split('T')[0]),
+                    registrationDate: new Date(Date.now() - 86400000).toISOString()
+                },
+                {
+                    id: 3,
+                    name: 'Carlos López',
+                    phone: '3005555555',
+                    email: 'carlos@email.com',
+                    passId: '3005555555',
+                    status: 'expired',
+                    validRange: '01/01/2024 - 17/01/2024',
+                    registrationDate: new Date(Date.now() - 172800000).toISOString()
+                }
+            ];
+        }
+
+        function updateAdminStats() {
+            const active = allPasses.filter(p => p.status === 'active').length;
+            const redeemed = allPasses.filter(p => p.status === 'redeemed').length;
+            const expired = allPasses.filter(p => p.status === 'expired').length;
+
+            document.getElementById('total-active').textContent = active;
+            document.getElementById('total-redeemed').textContent = redeemed;
+            document.getElementById('total-expired').textContent = expired;
+        }
+
+        function filterPasses(status) {
+            const passesList = document.getElementById('passes-list');
+            let filteredPasses = allPasses;
+
+            if (status !== 'all') {
+                filteredPasses = allPasses.filter(p => p.status === status);
+            }
+
+            // Update button styles
+            document.querySelectorAll('[id^="filter-"]').forEach(btn => {
+                btn.classList.remove('btn-primary');
+                btn.classList.add('btn-secondary');
+            });
+            document.getElementById(`filter-${status}`).classList.remove('btn-secondary');
+            document.getElementById(`filter-${status}`).classList.add('btn-primary');
+
+            // Display passes
+            if (filteredPasses.length === 0) {
+                passesList.innerHTML = '<div class="text-center text-gray-400">No hay pases en esta categoría</div>';
+                return;
+            }
+
+            passesList.innerHTML = filteredPasses.map(pass => {
+                const statusColors = {
+                    active: 'text-green-400',
+                    redeemed: 'text-blue-400',
+                    expired: 'text-yellow-400'
+                };
+
+                const statusIcons = {
+                    active: '✅',
+                    redeemed: '✓',
+                    expired: '⏰'
+                };
+
+                return `
+                    <div class="bg-black/20 border border-white/10 rounded-lg p-4">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <div class="font-bold text-white">${pass.name}</div>
+                                <div class="text-sm text-gray-400">${pass.phone}</div>
+                                <div class="text-xs text-gray-500">${pass.email}</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="${statusColors[pass.status]} font-semibold">
+                                    ${statusIcons[pass.status]} ${pass.status.toUpperCase()}
+                                </div>
+                                <div class="text-xs text-gray-400">ID: ${pass.passId}</div>
+                            </div>
+                        </div>
+                        <div class="text-xs text-gray-400">
+                            <div>Válido: ${pass.validRange}</div>
+                            <div>Registrado: ${new Date(pass.registrationDate).toLocaleDateString('es-ES')}</div>
+                        </div>
+                        ${pass.status === 'active' ? `
+                            <button onclick="redeemPassFromAdmin('${pass.id}')" class="btn-primary text-xs mt-2 w-full">
+                                Canjear Pase
+                            </button>
+                        ` : ''}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function redeemPassFromAdmin(passId) {
+            const pass = allPasses.find(p => p.id == passId);
+            if (!pass) return;
+
+            const confirmed = confirm(`¿Confirmas que quieres canjear el pase de ${pass.name}?`);
+            if (!confirmed) return;
+
+            pass.status = 'redeemed';
+            updateAdminStats();
+            filterPasses('all');
+            showToast('Éxito', `Pase de ${pass.name} canjeado correctamente`, 'success');
+        }
+
+        function exportData() {
+            const csvContent = "data:text/csv;charset=utf-8," 
+                + "Nombre,Teléfono,Email,Código,Estado,Período Válido,Fecha Registro\n"
+                + allPasses.map(pass => 
+                    `"${pass.name}","${pass.phone}","${pass.email}","${pass.passId}","${pass.status}","${pass.validRange}","${new Date(pass.registrationDate).toLocaleDateString('es-ES')}"`
+                ).join("\n");
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", `kokito_pases_${new Date().toISOString().split('T')[0]}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            showToast('Éxito', 'Datos exportados correctamente', 'success');
+        }
+
+        // Staff functions
+        async function loadStats() {
+            try {
+                // Simulate API call
+                // const response = await fetch('/api/stats');
+                // if (response.ok) {
+                //     const stats = await response.json();
+                //     document.getElementById('today-redemptions').textContent = stats.todayRedemptions;
+                // }
+                
+                // For demo purposes
+                document.getElementById('today-redemptions').textContent = '0';
+            } catch (error) {
+                console.error('Error loading stats:', error);
+            }
+        }
+
+        async function searchPassByPhone() {
+            const phone = document.getElementById('search-phone').value.trim();
+            
+            if (!phone) {
+                showToast('Error', 'Ingresa un número de teléfono', 'error');
+                return;
+            }
+            
+            showLoading();
+            
+            try {
+                // Simulate API call
+                // const response = await fetch(`/api/birthday-pass/phone/${encodeURIComponent(phone)}`);
+                // const result = await response.json();
+                
+                // For demo purposes
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                if (currentPass && currentPass.phone === phone) {
+                    displayFoundPass(currentPass);
+                } else {
+                    throw new Error('Pase no encontrado');
+                }
+                
+            } catch (error) {
+                showToast('No encontrado', error.message, 'warning');
+                document.getElementById('pass-result').classList.add('hidden');
+            } finally {
+                hideLoading();
+            }
+        }
+
+        function displayFoundPass(pass) {
+            const customerInfo = document.getElementById('customer-info');
+            
+            let statusText = '';
+            let canRedeem = false;
+            
+            if (pass.status === 'active') {
+                statusText = '<span class="text-green-400">✅ Activo</span>';
+                canRedeem = true;
+            } else if (pass.status === 'redeemed') {
+                statusText = '<span class="text-red-400">❌ Ya canjeado</span>';
+            } else {
+                statusText = '<span class="text-yellow-400">⚠️ Expirado</span>';
+            }
+            
+            customerInfo.innerHTML = `
+                <div class="text-white">
+                    <div><strong>Nombre:</strong> ${pass.name}</div>
+                    <div><strong>Teléfono:</strong> ${pass.phone}</div>
+                    <div><strong>Email:</strong> ${pass.email}</div>
+                    <div><strong>Estado:</strong> ${statusText}</div>
+                    <div><strong>Período Válido:</strong> ${pass.validRange}</div>
+                    <div><strong>Código:</strong> ${pass.passId}</div>
+                </div>
+            `;
+            
+            const redeemBtn = document.querySelector('#pass-result button');
+            redeemBtn.style.display = canRedeem ? 'block' : 'none';
+            redeemBtn.onclick = () => redeemPass(pass.passId);
+            
+            document.getElementById('pass-result').classList.remove('hidden');
+        }
+
+        async function redeemPass(passId) {
+            if (!passId) return;
+            
+            const confirmed = confirm('¿Confirmas que quieres canjear este pase?');
+            if (!confirmed) return;
+            
+            showLoading();
+            
+            try {
+                // Simulate API call
+                // const response = await fetch('/api/birthday-pass/redeem', {
+                //     method: 'POST',
+                //     headers: {
+                //         'Content-Type': 'application/json'
+                //     },
+                //     body: JSON.stringify({ 
+                //         passId: passId,
+                //         redeemedBy: 'Staff'
+                //     })
+                // });
+                
+                // For demo purposes
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                if (currentPass && currentPass.passId === passId) {
+                    currentPass.status = 'redeemed';
+                }
+                
+                showToast('¡Éxito!', 'Pase canjeado correctamente', 'success');
+                document.getElementById('pass-result').classList.add('hidden');
+                document.getElementById('search-phone').value = '';
+                loadStats();
+                
+            } catch (error) {
+                showToast('Error', error.message || 'Error al canjear', 'error');
+            } finally {
+                hideLoading();
+            }
+        }
+    </script>
 </body>
-</html>
+</html>A
