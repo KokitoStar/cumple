@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
     <title>Tatuajes Kokito - Beneficio de Cumpleaños</title>
     <meta name="description" content="Celebra tu cumpleaños con Tatuajes Kokito. Registrate y recibe un tatuaje gratis en tu día especial.">
     
@@ -26,12 +26,46 @@
             --kokito-text-secondary: #6b7280;
         }
         
+        /* Ensure proper rendering on all devices */
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            background: #1a1a2e;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-size: cover;
+            min-height: 100%;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+            background: transparent;
             min-height: 100vh;
+            min-height: 100dvh; /* For mobile browsers */
             color: var(--kokito-text-primary);
             position: relative;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            html {
+                background-attachment: scroll; /* Better performance on mobile */
+            }
+            
+            body {
+                background: #1a1a2e;
+                background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+            }
+            
+            .glitter-container {
+                display: none; /* Disable particles on mobile for better performance */
+            }
         }
 
         .glitter-container {
@@ -62,6 +96,7 @@
             background-repeat: repeat;
             background-size: 200px 100px;
             animation: glitter 4s linear infinite;
+            will-change: transform; /* Optimize for animations */
         }
 
         .glitter-container::after {
@@ -72,6 +107,7 @@
                 radial-gradient(2px 2px at 10px 60px, #ffd700, transparent),
                 radial-gradient(1px 1px at 80px 10px, #ffffff, transparent);
             animation: glitter 6s linear infinite reverse;
+            will-change: transform; /* Optimize for animations */
         }
 
         @keyframes glitter {
@@ -165,6 +201,30 @@
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
+            min-height: 100vh;
+            min-height: 100dvh;
+        }
+
+        /* Additional mobile fixes */
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 15px;
+            }
+            
+            .glass-card {
+                margin: 10px 0;
+            }
+            
+            /* Ensure proper spacing on mobile */
+            .min-h-screen {
+                min-height: 100vh;
+                min-height: 100dvh;
+            }
+        }
+
+        /* Fallback background for older browsers */
+        .fallback-bg {
+            background: #1a1a2e !important;
         }
 
         .toast {
@@ -224,7 +284,6 @@
                         <li>• Presentar pase junto con documento de identidad</li>
                         <li>• No acumulable con otras promociones</li>
                         <li>• Solo válido en Tatuajes Kokito</li>
-                        <li>• Una sola redención por persona al año</li>
                     </ul>
                 </div>
                 
@@ -282,7 +341,6 @@
                             <p>• <strong>Transferibilidad:</strong> Pase intransferible</p>
                             <p>• <strong>Identificación:</strong> Presentar documento de identidad junto al pase</p>
                             <p>• <strong>Exclusividad:</strong> No acumulable con otras promociones</p>
-                            <p>• <strong>Frecuencia:</strong> Una sola redención por persona al año</p>
                             <p>• <strong>Validez:</strong> Solo en Tatuajes Kokito</p>
                             <p>• <strong>Responsabilidad:</strong> El estudio se reserva el derecho de verificar la información</p>
                         </div>
@@ -329,8 +387,7 @@
                         • Guarda tu pase y preséntalo junto con tu cédula<br>
                         • Solo válido en el rango de fechas indicado<br>
                         • Válido únicamente por un tatuaje<br>
-                        • Pase intransferible<br>
-                        • Tu código de pase es tu número de teléfono
+                        • Pase intransferible
                     </p>
                 </div>
                 
@@ -462,7 +519,53 @@
             if (birthDateInput) {
                 birthDateInput.value = formattedDate;
             }
+            
+            // Fix mobile background issues
+            fixMobileBackground();
+            
+            // Also fix on window load for additional safety
+            window.addEventListener('load', fixMobileBackground);
+            window.addEventListener('resize', fixMobileBackground);
         });
+
+        // Fix mobile background rendering
+        function fixMobileBackground() {
+            // Check if we're on mobile
+            const isMobile = window.innerWidth <= 768 || /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            
+            // Force background for all devices to ensure consistency
+            const html = document.documentElement;
+            const body = document.body;
+            
+            // Set background on both html and body
+            const bgColor = '#1a1a2e';
+            const bgGradient = 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%)';
+            
+            html.style.background = bgColor;
+            html.style.backgroundImage = bgGradient;
+            body.style.background = bgColor;
+            body.style.backgroundImage = bgGradient;
+            
+            if (isMobile) {
+                // Additional mobile fixes
+                html.style.backgroundAttachment = 'scroll';
+                body.style.backgroundAttachment = 'scroll';
+                
+                // Disable particles for better performance
+                const glitterContainer = document.querySelector('.glitter-container');
+                if (glitterContainer) {
+                    glitterContainer.style.display = 'none';
+                }
+            }
+            
+            // Force repaint
+            setTimeout(() => {
+                body.style.transform = 'translateZ(0)';
+                setTimeout(() => {
+                    body.style.transform = '';
+                }, 50);
+            }, 100);
+        }
 
         // Date validation functions
         function isWithinBirthdayRange(birthDate) {
@@ -689,6 +792,13 @@
                         showToast('Error', 'Solo puedes registrarte dentro del rango de 8 días antes y 8 días después de tu cumpleaños', 'warning');
                         return;
                     }
+
+                    // Check if phone number already exists (one per year restriction)
+                    const existingPass = allPasses.find(pass => pass.phone === formData.phone);
+                    if (existingPass) {
+                        showToast('Error', 'Este número de teléfono ya ha sido registrado', 'error');
+                        return;
+                    }
                     
                     showLoading();
                     
@@ -805,164 +915,12 @@
                     <text x="50" y="521" fill="white" font-size="9" font-family="Arial, sans-serif">• Pase intransferible</text>
                     <text x="50" y="534" fill="white" font-size="9" font-family="Arial, sans-serif">• Presentar junto con documento de identidad</text>
                     <text x="50" y="547" fill="white" font-size="9" font-family="Arial, sans-serif">• No acumulable con otras promociones</text>
-                    <text x="50" y="560" fill="white" font-size="9" font-family="Arial, sans-serif">• Una redención por persona al año</text>
+                    <text x="50" y="560" fill="white" font-size="9" font-family="Arial, sans-serif">• Solo válido en Tatuajes Kokito</text>
                     
                     <!-- Footer -->
                     <text x="200" y="585" text-anchor="middle" fill="#666666" font-size="10" font-family="Arial, sans-serif">www.tatuajeskokito.com</text>
                 </svg>
             `;
-        }
-
-        // Screenshot capture function
-        function captureScreenshot() {
-            if (!currentPass) return;
-            
-            try {
-                // Create canvas with pass design
-                const canvas = document.createElement('canvas');
-                const ctx = canvas.getContext('2d');
-                
-                // Set canvas size
-                canvas.width = 400;
-                canvas.height = 600;
-                
-                // Create gradient background
-                const gradient = ctx.createLinearGradient(0, 0, 400, 600);
-                gradient.addColorStop(0, '#1a1a2e');
-                gradient.addColorStop(0.5, '#16213e');
-                gradient.addColorStop(1, '#0f0f23');
-                
-                ctx.fillStyle = gradient;
-                ctx.fillRect(0, 0, 400, 600);
-                
-                // Add border
-                ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
-                ctx.lineWidth = 2;
-                ctx.strokeRect(10, 10, 380, 580);
-                
-                // Draw logo placeholder (since SVG loading in canvas can be problematic)
-                ctx.fillStyle = '#333333';
-                ctx.fillRect(150, 30, 100, 60);
-                ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
-                ctx.strokeRect(150, 30, 100, 60);
-                ctx.fillStyle = 'white';
-                ctx.font = 'bold 12px Arial';
-                ctx.textAlign = 'center';
-                ctx.fillText('KOKITO', 200, 50);
-                ctx.font = '10px Arial';
-                ctx.fillText('TATTOO STUDIO', 200, 65);
-                
-                // Title section
-                ctx.fillStyle = '#a855f7';
-                ctx.font = 'bold 24px Arial';
-                ctx.textAlign = 'center';
-                ctx.fillText('PASE DE CUMPLEAÑOS', 200, 130);
-                
-                ctx.fillStyle = '#ec4899';
-                ctx.font = '18px Arial';
-                ctx.fillText('🎉 TATUAJE GRATIS 🎉', 200, 155);
-                
-                // Accent line
-                const accentGradient = ctx.createLinearGradient(30, 170, 370, 170);
-                accentGradient.addColorStop(0, '#a855f7');
-                accentGradient.addColorStop(0.5, '#ec4899');
-                accentGradient.addColorStop(1, '#059669');
-                ctx.fillStyle = accentGradient;
-                ctx.fillRect(30, 170, 340, 3);
-                
-                // Customer info section
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
-                ctx.fillRect(30, 190, 340, 220);
-                ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
-                ctx.strokeRect(30, 190, 340, 220);
-                
-                // Customer details
-                ctx.textAlign = 'left';
-                ctx.fillStyle = '#a855f7';
-                ctx.font = 'bold 14px Arial';
-                ctx.fillText('BENEFICIARIO:', 50, 220);
-                
-                ctx.fillStyle = 'white';
-                ctx.font = 'bold 16px Arial';
-                ctx.fillText(currentPass.name, 50, 245);
-                
-                ctx.fillStyle = '#a855f7';
-                ctx.font = 'bold 14px Arial';
-                ctx.fillText('CÓDIGO DE PASE:', 50, 275);
-                
-                ctx.fillStyle = 'white';
-                ctx.font = '16px monospace';
-                ctx.fillText(currentPass.passId, 50, 300);
-                
-                ctx.fillStyle = '#a855f7';
-                ctx.font = 'bold 14px Arial';
-                ctx.fillText('TELÉFONO:', 50, 330);
-                
-                ctx.fillStyle = 'white';
-                ctx.font = '14px Arial';
-                ctx.fillText(currentPass.phone, 50, 355);
-                
-                ctx.fillStyle = '#a855f7';
-                ctx.font = 'bold 14px Arial';
-                ctx.fillText('EMAIL:', 50, 380);
-                
-                ctx.fillStyle = 'white';
-                ctx.font = '12px Arial';
-                const emailText = currentPass.email.length > 25 ? currentPass.email.substring(0, 25) + '...' : currentPass.email;
-                ctx.fillText(emailText, 50, 400);
-                
-                ctx.fillStyle = '#a855f7';
-                ctx.font = 'bold 14px Arial';
-                ctx.fillText('PERÍODO VÁLIDO:', 50, 425);
-                
-                ctx.fillStyle = 'white';
-                ctx.font = '12px Arial';
-                ctx.fillText(currentPass.validRange, 50, 445);
-                
-                // Terms section
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.03)';
-                ctx.fillRect(30, 470, 340, 100);
-                ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
-                ctx.strokeRect(30, 470, 340, 100);
-                
-                ctx.fillStyle = '#ec4899';
-                ctx.font = 'bold 14px Arial';
-                ctx.textAlign = 'center';
-                ctx.fillText('TÉRMINOS Y CONDICIONES', 200, 490);
-                
-                ctx.fillStyle = 'white';
-                ctx.font = '9px Arial';
-                ctx.textAlign = 'left';
-                ctx.fillText('• Válido solo en el período indicado arriba', 50, 505);
-                ctx.fillText('• Válido únicamente por un tatuaje', 50, 518);
-                ctx.fillText('• Pase intransferible', 50, 531);
-                ctx.fillText('• Presentar junto con documento de identidad', 50, 544);
-                ctx.fillText('• No acumulable con otras promociones', 50, 557);
-                
-                // Footer
-                ctx.fillStyle = '#666666';
-                ctx.font = '10px Arial';
-                ctx.textAlign = 'center';
-                ctx.fillText('www.tatuajeskokito.com', 200, 585);
-                
-                // Download the canvas as image
-                canvas.toBlob(function(blob) {
-                    const url = URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = `pase-cumpleanos-${currentPass.passId}.png`;
-                    document.body.appendChild(a);
-                    a.click();
-                    document.body.removeChild(a);
-                    URL.revokeObjectURL(url);
-                    
-                    showToast('Éxito', 'Pase guardado como imagen', 'success');
-                });
-                
-            } catch (error) {
-                console.error('Error generating screenshot:', error);
-                showToast('Error', 'No se pudo generar la imagen del pase', 'error');
-            }
         }
 
         // Admin functions
@@ -1246,4 +1204,4 @@
         }
     </script>
 </body>
-</html>A
+</html>
